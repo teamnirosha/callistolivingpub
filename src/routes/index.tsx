@@ -6,12 +6,12 @@ import { EnquiryPopup } from "@/components/EnquiryPopup";
 import { HeroSection } from "@/components/HeroSection";
 import { ApproachSection } from "@/components/ApproachSection";
 import { ProjectShowcase } from "@/components/ProjectShowcase";
+import { GallerySection } from "@/components/GallerySection";
 import {
   About,
   Contact,
   FAQ,
   MaterialSection,
-  RoomPlanner,
   Services,
   Testimonials,
 } from "@/components/Sections";
@@ -61,9 +61,9 @@ function Home() {
         <HeroSection onEnquire={() => setIsEnquiryOpen(true)} />
         <ApproachSection />
         <ProjectShowcase />
+        <GallerySection onEnquire={() => setIsEnquiryOpen(true)} />
         <MaterialSection />
         <Services />
-        <RoomPlanner onEnquire={() => setIsEnquiryOpen(true)} />
         <About />
         <Testimonials />
         <FAQ />

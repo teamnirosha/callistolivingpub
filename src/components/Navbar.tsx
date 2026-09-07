@@ -7,7 +7,7 @@ const LINKS = [
   { label: "ABOUT", to: "/", hash: "about" },
   { label: "SERVICES", to: "/", hash: "services" },
   { label: "PROJECTS", to: "/", hash: "projects" },
-  { label: "INTERIORS", to: "/", hash: "interiors" },
+  { label: "GALLERY", to: "/", hash: "gallery" },
   { label: "CONTACT", to: "/", hash: "contact" },
 ];
 
@@ -40,18 +40,18 @@ export function Navbar({ onEnquire }: NavbarProps) {
     };
   }, [mobileMenuOpen]);
 
-  const handleNavClick = (e: React.MouseEvent, hash?: string) => {
+  const handleNavClick = (e: React.MouseEvent, to: string = "/", hash?: string) => {
+    setMobileMenuOpen(false);
+    const currentPath = typeof window !== "undefined" ? window.location.pathname : "/";
+
     if (hash) {
       const el = document.getElementById(hash);
-      if (el) {
+      if (el && currentPath === "/") {
         e.preventDefault();
         el.scrollIntoView({ behavior: "smooth", block: "start" });
+        return;
       }
-    } else {
-      e.preventDefault();
-      window.scrollTo({ top: 0, behavior: "smooth" });
     }
-    setMobileMenuOpen(false);
   };
 
   return (
@@ -66,7 +66,7 @@ export function Navbar({ onEnquire }: NavbarProps) {
         {/* LEFT: Official Callisto Living Logo */}
         <Link
           to="/"
-          onClick={(e) => handleNavClick(e)}
+          onClick={(e) => handleNavClick(e, "/", undefined)}
           className="group flex items-center transition-opacity hover:opacity-90"
         >
           <CallistoLogo
@@ -83,7 +83,7 @@ export function Navbar({ onEnquire }: NavbarProps) {
               key={link.label}
               to={link.to}
               hash={link.hash}
-              onClick={(e) => handleNavClick(e, link.hash)}
+              onClick={(e) => handleNavClick(e, link.to, link.hash)}
               className={`relative py-1 text-[11px] uppercase tracking-[0.2em] font-medium transition-colors duration-300 group ${
                 scrolled
                   ? "text-[#171817]/80 hover:text-[#DE1D25]"
@@ -164,7 +164,7 @@ export function Navbar({ onEnquire }: NavbarProps) {
                 key={link.label}
                 to={link.to}
                 hash={link.hash}
-                onClick={(e) => handleNavClick(e, link.hash)}
+                onClick={(e) => handleNavClick(e, link.to, link.hash)}
                 className="font-display text-3xl sm:text-4xl tracking-wide text-[#F3EFE7] transition-colors hover:text-[#DE1D25]"
               >
                 {link.label}

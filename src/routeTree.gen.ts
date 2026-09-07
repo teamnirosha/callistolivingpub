@@ -10,11 +10,23 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as GallaryRouteImport } from './routes/Gallary'
+import { Route as GalleryRouteImport } from './routes/gallery'
 import { Route as ProjectsSlugRouteImport } from './routes/projects/$slug'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const GallaryRoute = GallaryRouteImport.update({
+  id: '/Gallary',
+  path: '/Gallary',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const GalleryRoute = GalleryRouteImport.update({
+  id: '/gallery',
+  path: '/gallery',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ProjectsSlugRoute = ProjectsSlugRouteImport.update({
@@ -25,27 +37,35 @@ const ProjectsSlugRoute = ProjectsSlugRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/Gallary': typeof GallaryRoute
+  '/gallery': typeof GalleryRoute
   '/projects/$slug': typeof ProjectsSlugRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/Gallary': typeof GallaryRoute
+  '/gallery': typeof GalleryRoute
   '/projects/$slug': typeof ProjectsSlugRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/Gallary': typeof GallaryRoute
+  '/gallery': typeof GalleryRoute
   '/projects/$slug': typeof ProjectsSlugRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/projects/$slug'
+  fullPaths: '/' | '/Gallary' | '/gallery' | '/projects/$slug'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/projects/$slug'
-  id: '__root__' | '/' | '/projects/$slug'
+  to: '/' | '/Gallary' | '/gallery' | '/projects/$slug'
+  id: '__root__' | '/' | '/Gallary' | '/gallery' | '/projects/$slug'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  GallaryRoute: typeof GallaryRoute
+  GalleryRoute: typeof GalleryRoute
   ProjectsSlugRoute: typeof ProjectsSlugRoute
 }
 
@@ -56,6 +76,20 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/Gallary': {
+      id: '/Gallary'
+      path: '/Gallary'
+      fullPath: '/Gallary'
+      preLoaderRoute: typeof GallaryRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/gallery': {
+      id: '/gallery'
+      path: '/gallery'
+      fullPath: '/gallery'
+      preLoaderRoute: typeof GalleryRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/projects/$slug': {
@@ -70,6 +104,8 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  GallaryRoute: GallaryRoute,
+  GalleryRoute: GalleryRoute,
   ProjectsSlugRoute: ProjectsSlugRoute,
 }
 export const routeTree = rootRouteImport
