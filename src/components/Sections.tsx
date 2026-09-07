@@ -10,6 +10,7 @@ import villa from "@/assets/project-villa.webp";
 import { PROJECTS } from "@/lib/projects";
 import { setState } from "@/lib/store";
 import { MaterialExplorer } from "./SceneControls";
+import { CallistoLogo } from "./CallistoLogo";
 
 if (typeof window !== "undefined") gsap.registerPlugin(ScrollTrigger);
 
@@ -172,14 +173,12 @@ export function Journey({ onProgress }: { onProgress: (p: number) => void }) {
             {JOURNEY.map((r, i) => (
               <div key={r.name} className="flex items-center gap-3 py-1">
                 <div
-                  className={`h-px transition-all duration-500 ${
-                    i === index ? "w-10 bg-gold" : "w-4 bg-sand/25"
-                  }`}
+                  className={`h-px transition-all duration-500 ${i === index ? "w-10 bg-gold" : "w-4 bg-sand/25"
+                    }`}
                 />
                 <span
-                  className={`text-[9px] uppercase tracking-[0.24em] transition-colors ${
-                    i === index ? "text-gold" : "text-sand/35"
-                  }`}
+                  className={`text-[9px] uppercase tracking-[0.24em] transition-colors ${i === index ? "text-gold" : "text-sand/35"
+                    }`}
                 >
                   {r.name}
                 </span>
@@ -299,11 +298,10 @@ export function RoomPlanner({ onEnquire }: { onEnquire?: () => void }) {
                 onClick={() => setActiveId(room.id)}
                 onMouseEnter={() => setState({ cursor: "open" })}
                 onMouseLeave={() => setState({ cursor: "default" })}
-                className={`group flex items-center gap-3 border px-6 py-4 transition-all duration-300 whitespace-nowrap cursor-pointer ${
-                  selected
-                    ? "border-gold bg-gold/15 text-gold shadow-[0_0_20px_rgba(212,175,55,0.2)]"
-                    : "border-sand/20 bg-bone/5 text-sand/70 hover:border-gold/60 hover:text-sand"
-                }`}
+                className={`group flex items-center gap-3 border px-6 py-4 transition-all duration-300 whitespace-nowrap cursor-pointer ${selected
+                  ? "border-gold bg-gold/15 text-gold shadow-[0_0_20px_rgba(212,175,55,0.2)]"
+                  : "border-sand/20 bg-bone/5 text-sand/70 hover:border-gold/60 hover:text-sand"
+                  }`}
               >
                 <Icon
                   size={18}
@@ -416,11 +414,10 @@ export function RoomPlanner({ onEnquire }: { onEnquire?: () => void }) {
                 key={room.id}
                 type="button"
                 onClick={() => setActiveId(room.id)}
-                className={`group relative overflow-hidden border p-4 text-left transition-all duration-300 cursor-pointer ${
-                  isSelected
-                    ? "border-gold bg-gold/10"
-                    : "border-sand/15 bg-bone/5 hover:border-gold/50"
-                }`}
+                className={`group relative overflow-hidden border p-4 text-left transition-all duration-300 cursor-pointer ${isSelected
+                  ? "border-gold bg-gold/10"
+                  : "border-sand/15 bg-bone/5 hover:border-gold/50"
+                  }`}
               >
                 <div className="aspect-[4/3] w-full overflow-hidden mb-3">
                   <img
@@ -1061,13 +1058,25 @@ export function Contact() {
             </a>
           </div>
         </Reveal>
-        <div className="mt-24 flex flex-wrap items-center justify-between gap-4 border-t border-sand/10 pt-8">
-          <span className="font-display text-lg tracking-[0.3em] text-sand/70">
-            CALLISTO LIVING
-          </span>
-          <span className="text-[10px] uppercase tracking-[0.28em] text-sand/35">
-            © {new Date().getFullYear()} — Interior Architecture
-          </span>
+        <div className="mt-20 flex flex-col md:flex-row items-center justify-between gap-6 border-t border-[#171817]/15 pt-8 pb-4 text-[#6E665C]">
+          <div className="flex items-center gap-4">
+            <CallistoLogo variant="full-color" height={32} />
+            <span className="text-[10px] uppercase tracking-[0.2em] text-[#6E665C]">
+              © {new Date().getFullYear()} — Premium Interior Studio
+            </span>
+          </div>
+
+          <div className="text-[11px] font-medium uppercase tracking-[0.2em] text-[#6E665C]">
+            <span>Designed and developed by </span>
+            <a
+              href="https://nirosha.org/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-[#DE1D25] font-semibold underline underline-offset-4 transition-colors hover:text-[#171817]"
+            >
+              Team Nirosha
+            </a>
+          </div>
         </div>
       </div>
     </section>

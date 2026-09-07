@@ -64,17 +64,25 @@
   --color-bone: var(--bone);
   --color-gold: var(--gold);
   --color-stone: var(--stone);
-  --font-display: "Cormorant Garamond", ui-serif, Georgia, serif;
-  --font-sans: "Jost", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Cormorant Garamond", Georgia, serif;
+  --font-sans: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
+  --color-ivory: #F3EFE7;
+  --color-charcoal: #171817;
+  --color-cream: #FAF8F5;
+  --color-sand-accent: #E6E0D4;
+  --color-taupe: #A89F91;
+  --color-taupe-dark: #6E665C;
+  --color-champagne: #C5B7A7;
+  --color-callisto-red: #DE1D25;
 }
 
 :root {
   --radius: 0.125rem;
-  --ink: oklch(0.97 0.008 88);
-  --sand: oklch(0.21 0.012 62);
-  --bone: oklch(0.91 0.014 82);
-  --gold: oklch(0.49 0.075 72);
-  --stone: oklch(0.48 0.015 70);
+  --ink: #F3EFE7;
+  --sand: #171817;
+  --bone: #FAF8F5;
+  --gold: #DE1D25;
+  --stone: #6E665C;
   --background: oklch(1 0 0);
   --foreground: oklch(0.129 0.042 264.695);
   --card: oklch(1 0 0);
