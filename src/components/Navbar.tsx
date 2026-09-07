@@ -1,5 +1,5 @@
 import { Link } from "@tanstack/react-router";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { CallistoLogo } from "./CallistoLogo";
 
 const LINKS = [
@@ -8,7 +8,6 @@ const LINKS = [
   { label: "SERVICES", to: "/", hash: "services" },
   { label: "PROJECTS", to: "/", hash: "projects" },
   { label: "INTERIORS", to: "/", hash: "interiors" },
-  { label: "GALLERY", to: "/experience" },
   { label: "CONTACT", to: "/", hash: "contact" },
 ];
 
@@ -29,6 +28,32 @@ export function Navbar({ onEnquire }: NavbarProps) {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  // Lock body scroll when mobile menu is open
+  useEffect(() => {
+    if (mobileMenuOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "unset";
+    }
+    return () => {
+      document.body.style.overflow = "unset";
+    };
+  }, [mobileMenuOpen]);
+
+  const handleNavClick = (e: React.MouseEvent, hash?: string) => {
+    if (hash) {
+      const el = document.getElementById(hash);
+      if (el) {
+        e.preventDefault();
+        el.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
+    } else {
+      e.preventDefault();
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+    setMobileMenuOpen(false);
+  };
+
   return (
     <header
       className={`fixed inset-x-0 top-0 z-[100] transition-all duration-500 ${
@@ -39,7 +64,11 @@ export function Navbar({ onEnquire }: NavbarProps) {
     >
       <nav className="mx-auto flex max-w-[1600px] items-center justify-between px-6 lg:px-12">
         {/* LEFT: Official Callisto Living Logo */}
-        <Link to="/" className="group flex items-center transition-opacity hover:opacity-90">
+        <Link
+          to="/"
+          onClick={(e) => handleNavClick(e)}
+          className="group flex items-center transition-opacity hover:opacity-90"
+        >
           <CallistoLogo
             variant={scrolled ? "dark" : "light"}
             height={42}
@@ -54,6 +83,7 @@ export function Navbar({ onEnquire }: NavbarProps) {
               key={link.label}
               to={link.to}
               hash={link.hash}
+              onClick={(e) => handleNavClick(e, link.hash)}
               className={`relative py-1 text-[11px] uppercase tracking-[0.2em] font-medium transition-colors duration-300 group ${
                 scrolled
                   ? "text-[#171817]/80 hover:text-[#DE1D25]"
@@ -62,9 +92,7 @@ export function Navbar({ onEnquire }: NavbarProps) {
             >
               {link.label}
               {/* Red Hover Underline */}
-              <span
-                className="absolute bottom-0 left-0 h-[1.5px] w-0 bg-[#DE1D25] transition-all duration-300 group-hover:w-full"
-              />
+              <span className="absolute bottom-0 left-0 h-[1.5px] w-0 bg-[#DE1D25] transition-all duration-300 group-hover:w-full" />
             </Link>
           ))}
         </div>
@@ -89,23 +117,10 @@ export function Navbar({ onEnquire }: NavbarProps) {
 
         {/* MOBILE CONTROLS */}
         <div className="flex items-center gap-3 lg:hidden">
-          {onEnquire && (
-            <button
-              type="button"
-              onClick={onEnquire}
-              className={`px-3 py-1.5 text-[10px] font-semibold uppercase tracking-[0.16em] border transition-colors ${
-                scrolled
-                  ? "border-[#171817] bg-[#171817] text-[#F3EFE7]"
-                  : "border-white/50 bg-white/10 text-white"
-              }`}
-            >
-              ENQUIRE
-            </button>
-          )}
           <button
             type="button"
             onClick={() => setMobileMenuOpen((prev) => !prev)}
-            className="p-1.5 focus:outline-hidden"
+            className="p-1.5 focus:outline-hidden cursor-pointer"
             aria-label="Toggle Navigation Menu"
           >
             <div className="flex flex-col gap-1.5 w-6">
@@ -129,28 +144,28 @@ export function Navbar({ onEnquire }: NavbarProps) {
         </div>
       </nav>
 
-      {/* FULL-SCREEN MOBILE OVERLAY MENU */}
+      {/* FULL-SCREEN MOBILE OVERLAY MENU — SOLID BLACK OPAQUE BACKGROUND */}
       {mobileMenuOpen && (
-        <div className="fixed inset-0 z-[90] flex flex-col justify-between bg-[#171817] px-8 pt-6 pb-10 text-[#F3EFE7] animate-in fade-in slide-in-from-top-4 duration-300 lg:hidden">
+        <div className="fixed inset-0 z-[200] flex flex-col justify-between bg-[#171817] px-6 sm:px-8 pt-6 pb-10 text-[#F3EFE7] animate-in fade-in duration-200 lg:hidden w-screen h-screen overflow-y-auto">
           <div className="flex items-center justify-between border-b border-[#F3EFE7]/15 pb-6">
             <CallistoLogo variant="light" height={36} hideTaglineOnMobile={true} />
             <button
               type="button"
               onClick={() => setMobileMenuOpen(false)}
-              className="text-xs uppercase tracking-[0.2em] font-semibold text-[#DE1D25]"
+              className="text-xs uppercase tracking-[0.2em] font-semibold text-[#DE1D25] cursor-pointer"
             >
               CLOSE ✕
             </button>
           </div>
 
-          <div className="flex flex-col gap-5 py-6">
+          <div className="flex flex-col gap-6 py-8">
             {LINKS.map((link) => (
               <Link
                 key={link.label}
                 to={link.to}
                 hash={link.hash}
-                onClick={() => setMobileMenuOpen(false)}
-                className="font-display text-3xl tracking-wide text-[#F3EFE7] transition-colors hover:text-[#DE1D25]"
+                onClick={(e) => handleNavClick(e, link.hash)}
+                className="font-display text-3xl sm:text-4xl tracking-wide text-[#F3EFE7] transition-colors hover:text-[#DE1D25]"
               >
                 {link.label}
               </Link>
@@ -172,7 +187,7 @@ export function Navbar({ onEnquire }: NavbarProps) {
                   setMobileMenuOpen(false);
                   onEnquire();
                 }}
-                className="mt-5 flex w-full items-center justify-center gap-2 bg-[#DE1D25] py-3.5 text-xs font-semibold uppercase tracking-[0.2em] text-white transition-colors hover:bg-white hover:text-[#171817]"
+                className="mt-5 flex w-full items-center justify-center gap-2 bg-[#DE1D25] py-3.5 text-xs font-semibold uppercase tracking-[0.2em] text-white transition-colors hover:bg-white hover:text-[#171817] cursor-pointer"
               >
                 <span>ENQUIRE NOW</span>
                 <span>→</span>

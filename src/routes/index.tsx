@@ -67,7 +67,7 @@ function Home() {
         <About />
         <Testimonials />
         <FAQ />
-        <Contact />
+        <Contact onEnquire={() => setIsEnquiryOpen(true)} />
       </main>
     </div>
   );

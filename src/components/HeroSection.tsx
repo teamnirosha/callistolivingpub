@@ -69,7 +69,6 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onEnquire }) => {
 
   const handleSelectSlide = (idx: number) => {
     setActiveOptionIndex(idx);
-    // Reset timer on user manual selection
     if (timerRef.current) clearInterval(timerRef.current);
     timerRef.current = window.setInterval(() => {
       setActiveOptionIndex((prev) => (prev + 1) % HERO_OPTIONS.length);
@@ -82,66 +81,20 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onEnquire }) => {
     const ctx = gsap.context(() => {
       if (prefersReducedMotion) return;
 
-      const tl = gsap.timeline({ delay: 0.2 });
+      const tl = gsap.timeline({ delay: 0.1 });
 
       if (bgContainerRef.current) {
         tl.fromTo(
           bgContainerRef.current,
-          { scale: 1.04, opacity: 0 },
-          { scale: 1.0, opacity: 1, duration: 1.4, ease: "power2.out" }
+          { scale: 1.03, opacity: 0 },
+          { scale: 1.0, opacity: 1, duration: 1.0, ease: "power2.out" }
         );
       }
 
-      tl.from(".hero-eyebrow", { y: 10, opacity: 0, duration: 0.6, ease: "power3.out" }, "-=1.0");
-
-      tl.from(
-        ".hero-headline-line",
-        {
-          y: 25,
-          opacity: 0,
-          duration: 0.9,
-          stagger: 0.12,
-          ease: "power3.out",
-        },
-        "-=0.5"
-      );
-
-      tl.from(".hero-description", { y: 15, opacity: 0, duration: 0.7, ease: "power3.out" }, "-=0.4");
-
-      tl.from(
-        ".hero-cta-btn",
-        { y: 10, opacity: 0, duration: 0.6, stagger: 0.1, ease: "power3.out" },
-        "-=0.3"
-      );
-
-      tl.from(".hero-scroll-indicator, .hero-switcher", { opacity: 0, duration: 0.6, ease: "power2.out" }, "-=0.2");
-
-      if (rootRef.current) {
-        gsap.to(".hero-parallax-content", {
-          y: -30,
-          opacity: 0.2,
-          ease: "none",
-          scrollTrigger: {
-            trigger: rootRef.current,
-            start: "top top",
-            end: "bottom top",
-            scrub: true,
-          },
-        });
-
-        if (bgContainerRef.current) {
-          gsap.to(bgContainerRef.current, {
-            y: 40,
-            ease: "none",
-            scrollTrigger: {
-              trigger: rootRef.current,
-              start: "top top",
-              end: "bottom top",
-              scrub: true,
-            },
-          });
-        }
-      }
+      // Smooth text reveal
+      tl.from(".hero-eyebrow", { y: 10, opacity: 0, duration: 0.5, ease: "power3.out" }, "-=0.6");
+      tl.from(".hero-headline-line", { y: 18, opacity: 0, duration: 0.6, stagger: 0.1, ease: "power3.out" }, "-=0.3");
+      tl.from(".hero-description", { y: 10, opacity: 0, duration: 0.5, ease: "power3.out" }, "-=0.2");
     }, rootRef);
 
     return () => ctx.revert();
@@ -150,9 +103,9 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onEnquire }) => {
   return (
     <section
       ref={rootRef}
-      className="relative flex min-h-screen w-full items-center overflow-hidden bg-[#171817] text-[#F3EFE7]"
+      className="relative flex min-h-[100dvh] w-full flex-col justify-between overflow-hidden bg-[#171817] text-[#F3EFE7] pt-20 pb-16 sm:pt-24 sm:pb-20"
     >
-      {/* BACKGROUND IMAGE SLIDESHOW WITH DUAL-LAYERED SMOOTH CROSS-FADE */}
+      {/* BACKGROUND IMAGE SLIDESHOW */}
       <div ref={bgContainerRef} className="absolute inset-0 z-0 overflow-hidden">
         {HERO_OPTIONS.map((opt, idx) => {
           const isActive = idx === activeOptionIndex;
@@ -174,19 +127,19 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onEnquire }) => {
       <div className="absolute inset-0 z-10 bg-gradient-to-r from-black/85 via-black/45 to-transparent w-full md:w-3/5 pointer-events-none" />
       <div className="absolute inset-0 z-10 bg-gradient-to-t from-black/65 via-transparent to-black/40 pointer-events-none" />
 
-      {/* MAIN CONTENT BINDING - TIGHT SPACING */}
-      <div className="hero-parallax-content relative z-20 mx-auto w-full max-w-[1600px] px-6 pt-24 pb-20 md:pt-28 md:pb-24 lg:px-12">
+      {/* MAIN CONTENT BINDING — GUARANTEED ALWAYS VISIBLE BUTTONS */}
+      <div className="relative z-20 mx-auto my-auto w-full max-w-[1600px] px-6 lg:px-12">
         <div className="max-w-2xl">
           {/* Eyebrow */}
-          <div className="hero-eyebrow mb-3 inline-flex items-center gap-2.5">
+          <div className="hero-eyebrow mb-2 sm:mb-3 inline-flex items-center gap-2">
             <span className="h-1.5 w-1.5 rounded-full bg-[#DE1D25]" />
             <span className="text-[10px] md:text-[11px] font-semibold uppercase tracking-[0.25em] text-[#F3EFE7]/90">
               PREMIUM INTERIOR DESIGN STUDIO
             </span>
           </div>
 
-          {/* Headline: Compact Line Height */}
-          <h1 className="font-display leading-[0.82] text-5xl sm:text-7xl md:text-8xl lg:text-[7rem] tracking-tight text-[#F3EFE7]">
+          {/* Headline */}
+          <h1 className="font-display leading-[0.85] text-3xl sm:text-5xl md:text-7xl lg:text-[6.5rem] tracking-tight text-[#F3EFE7]">
             <span className="hero-headline-line block">SPACES</span>
             <span className="hero-headline-line block">THAT</span>
             <span className="hero-headline-line block font-normal italic text-[#C5B7A7]">
@@ -195,41 +148,41 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onEnquire }) => {
           </h1>
 
           {/* Short Description */}
-          <p className="hero-description mt-5 max-w-[500px] text-xs sm:text-sm md:text-base leading-relaxed text-[#F3EFE7]/85 font-light">
+          <p className="hero-description mt-3 sm:mt-4 max-w-[460px] text-xs sm:text-sm md:text-base leading-relaxed text-[#F3EFE7]/85 font-light">
             We create timeless luxury interiors where architecture, bespoke craftsmanship, and emotional elegance unite seamlessly.
           </p>
 
-          {/* CTA Group */}
-          <div className="mt-7 flex flex-wrap items-center gap-3 sm:gap-4">
-            <a
-              href="#projects"
-              className="hero-cta-btn group inline-flex items-center justify-center gap-2.5 bg-[#F3EFE7] px-7 py-3.5 text-[11px] sm:text-xs font-semibold uppercase tracking-[0.2em] text-[#171817] transition-all duration-300 hover:bg-white hover:shadow-md cursor-pointer"
-            >
-              <span>EXPLORE OUR WORK</span>
-              <span className="transition-transform duration-300 group-hover:translate-x-1">→</span>
-            </a>
-
+          {/* CTA GROUP — GUARANTEED ALWAYS VISIBLE */}
+          <div className="mt-5 sm:mt-7 flex flex-wrap items-center gap-3 sm:gap-4 relative z-30 opacity-100">
             <button
               type="button"
               onClick={onEnquire}
-              className="hero-cta-btn inline-flex items-center justify-center border border-[#F3EFE7]/40 bg-white/5 backdrop-blur-xs px-7 py-3.5 text-[11px] sm:text-xs font-semibold uppercase tracking-[0.2em] text-[#F3EFE7] transition-all duration-300 hover:border-[#F3EFE7] hover:bg-white/15 cursor-pointer"
+              className="group inline-flex items-center justify-center gap-2 bg-[#DE1D25] px-6 sm:px-7 py-3 sm:py-3.5 text-xs font-semibold uppercase tracking-[0.18em] text-white transition-all duration-300 hover:bg-white hover:text-[#171817] shadow-lg cursor-pointer opacity-100"
             >
-              VIEW PROJECTS
+              <span>TAKE ENQUIRY</span>
+              <span className="transition-transform duration-300 group-hover:translate-x-1">→</span>
             </button>
+
+            <a
+              href="#projects"
+              className="inline-flex items-center justify-center border border-[#F3EFE7]/40 bg-white/5 backdrop-blur-xs px-6 sm:px-7 py-3 sm:py-3.5 text-xs font-semibold uppercase tracking-[0.18em] text-[#F3EFE7] transition-all duration-300 hover:border-[#F3EFE7] hover:bg-white/15 cursor-pointer opacity-100"
+            >
+              EXPLORE OUR WORK
+            </a>
           </div>
         </div>
       </div>
 
       {/* LOWER SCROLL & EDITORIAL SWITCHER */}
-      <div className="absolute bottom-6 left-6 right-6 z-30 flex items-end justify-between md:left-12 md:right-12 pointer-events-auto">
-        <div className="hero-scroll-indicator flex items-center gap-3 text-[#F3EFE7]/70">
-          <div className="h-8 w-[1px] bg-gradient-to-b from-[#F3EFE7] to-transparent animate-pulse" />
+      <div className="relative z-30 mx-auto w-full max-w-[1600px] px-6 lg:px-12 pt-4 flex items-end justify-between pointer-events-auto">
+        <div className="flex items-center gap-3 text-[#F3EFE7]/70">
+          <div className="h-6 sm:h-8 w-[1px] bg-gradient-to-b from-[#F3EFE7] to-transparent animate-pulse" />
           <span className="text-[9px] font-medium uppercase tracking-[0.22em] text-[#F3EFE7]/80">
             SCROLL TO EXPLORE
           </span>
         </div>
 
-        <div className="hero-switcher flex items-center gap-1.5 rounded-xs border border-white/15 bg-black/40 p-1 backdrop-blur-md">
+        <div className="flex items-center gap-1.5 rounded-xs border border-white/15 bg-black/40 p-1 backdrop-blur-md">
           {HERO_OPTIONS.map((opt, idx) => {
             const isActive = idx === activeOptionIndex;
             return (

@@ -166,6 +166,8 @@
 @layer base {
   html {
     -webkit-font-smoothing: antialiased;
+    scroll-behavior: smooth;
+    scroll-padding-top: 80px;
     overflow-x: hidden;
     overflow-y: scroll;
     scrollbar-width: thin;

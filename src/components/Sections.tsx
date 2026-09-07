@@ -85,13 +85,6 @@ export function Hero({ onEnquire }: { onEnquire: () => void }) {
             Explore Our Work
           </a>
 
-          <Link
-            to="/experience"
-            {...hoverProps()}
-            className="hero-cta inline-flex w-full sm:w-auto items-center justify-center border border-sand/30 bg-sand/5 px-8 py-4 text-xs md:text-sm font-medium uppercase tracking-[0.2em] text-sand transition-all duration-300 hover:border-sand hover:bg-sand/15 text-center"
-          >
-            Enter 3D Experience
-          </Link>
         </div>
       </div>
 
@@ -265,7 +258,7 @@ export function RoomPlanner({ onEnquire }: { onEnquire?: () => void }) {
   return (
     <section
       id="interiors"
-      className="relative border-t border-sand/15 bg-ink py-28 overflow-hidden"
+      className="relative border-t border-sand/15 bg-ink py-14 sm:py-20 overflow-hidden"
     >
       <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[700px] h-[400px] bg-gold/5 blur-[120px] pointer-events-none rounded-full" />
 
@@ -354,26 +347,28 @@ export function RoomPlanner({ onEnquire }: { onEnquire?: () => void }) {
             </div>
           </div>
 
-          <div className="flex flex-col justify-between border border-sand/15 bg-bone/5 p-8 md:p-10 backdrop-blur-md">
+          <div className="flex flex-col justify-between border border-[#F3EFE7]/15 bg-[#171817] p-6 md:p-10 text-[#F3EFE7] rounded-xs shadow-xl">
             <div>
               <div className="flex items-center gap-3">
-                <span className="h-px w-8 bg-gold" />
-                <p className="eyebrow text-gold">Design Story & Specs</p>
+                <span className="h-px w-8 bg-[#DE1D25]" />
+                <p className="text-[10px] uppercase tracking-[0.2em] font-semibold text-[#DE1D25]">
+                  Design Story & Specs
+                </p>
               </div>
 
-              <blockquote className="mt-6 border-l-2 border-gold pl-5 font-display text-2xl md:text-3xl italic leading-relaxed text-sand">
+              <blockquote className="mt-6 border-l-2 border-[#DE1D25] pl-5 font-display text-2xl md:text-3xl italic leading-relaxed text-[#F3EFE7]">
                 “{active.quote}”
               </blockquote>
 
-              <div className="mt-8 space-y-5 border-t border-sand/15 pt-6">
+              <div className="mt-8 space-y-5 border-t border-[#F3EFE7]/15 pt-6">
                 {active.specs.map((spec) => (
                   <div key={spec.title} className="flex items-start gap-4">
-                    <span className="mt-1 h-2 w-2 shrink-0 rounded-full bg-gold" />
+                    <span className="mt-1 h-2 w-2 shrink-0 rounded-full bg-[#DE1D25]" />
                     <div>
-                      <h4 className="text-xs uppercase tracking-[0.18em] font-semibold text-sand">
+                      <h4 className="text-xs uppercase tracking-[0.18em] font-semibold text-[#F3EFE7]">
                         {spec.title}
                       </h4>
-                      <p className="mt-1 text-xs md:text-sm text-sand/70 leading-relaxed">
+                      <p className="mt-1 text-xs md:text-sm text-[#F3EFE7]/70 leading-relaxed">
                         {spec.desc}
                       </p>
                     </div>
@@ -382,30 +377,23 @@ export function RoomPlanner({ onEnquire }: { onEnquire?: () => void }) {
               </div>
             </div>
 
-            <div className="mt-10 flex flex-wrap items-center gap-4 border-t border-sand/15 pt-8">
+            <div className="mt-10 border-t border-[#F3EFE7]/15 pt-6">
               {onEnquire && (
                 <button
                   type="button"
                   onClick={onEnquire}
                   onMouseEnter={() => setState({ cursor: "open" })}
                   onMouseLeave={() => setState({ cursor: "default" })}
-                  className="flex-1 min-w-[200px] border border-gold bg-gold px-6 py-4 text-xs font-bold uppercase tracking-[0.2em] text-ink transition-all duration-300 hover:bg-sand hover:border-sand shadow-[0_0_20px_rgba(212,175,55,0.3)] cursor-pointer text-center"
+                  className="w-full bg-[#DE1D25] px-6 py-4 text-xs font-semibold uppercase tracking-[0.2em] text-white transition-all duration-300 hover:bg-white hover:text-[#171817] cursor-pointer text-center"
                 >
-                  Enquire For This Space →
+                  ENQUIRE FOR THIS SPACE →
                 </button>
               )}
-              <Link
-                to="/experience"
-                onMouseEnter={() => setState({ cursor: "view" })}
-                onMouseLeave={() => setState({ cursor: "default" })}
-                className="flex-1 min-w-[180px] border border-gold/60 px-6 py-4 text-xs font-semibold uppercase tracking-[0.18em] text-gold transition-all duration-300 hover:bg-gold/15 text-center"
-              >
-                3D Room View →
-              </Link>
             </div>
           </div>
         </div>
 
+        {/* TEMPORARILY COMMENTED OUT 4 ROOM SELECTION BOXES
         <div className="mt-14 grid grid-cols-2 gap-4 md:grid-cols-4">
           {ROOM_COLLECTIONS.map((room, idx) => {
             const isSelected = room.id === activeId;
@@ -433,6 +421,7 @@ export function RoomPlanner({ onEnquire }: { onEnquire?: () => void }) {
             );
           })}
         </div>
+        */}
       </div>
     </section>
   );
@@ -461,7 +450,7 @@ function Reveal({ children, className = "" }: { children: React.ReactNode; class
 
 export function MaterialSection() {
   return (
-    <section className="relative border-t border-sand/10 py-28">
+    <section className="relative border-t border-sand/10 py-14 sm:py-20">
       <div className="mx-auto grid max-w-[1600px] gap-12 px-6 md:grid-cols-2 md:px-12">
         <Reveal>
           <p className="eyebrow">07 — Materiality</p>
@@ -499,7 +488,7 @@ const SERVICES = [
 
 export function Services() {
   return (
-    <section id="services" className="relative bg-ink py-28">
+    <section id="services" className="relative bg-ink py-14 sm:py-20">
       <div className="mx-auto max-w-[1600px] px-6 md:px-12">
         <Reveal>
           <p className="eyebrow">Services</p>
@@ -605,7 +594,7 @@ export function Projects() {
 
 export function About() {
   return (
-    <section id="about" className="relative bg-ink py-28">
+    <section id="about" className="relative bg-ink py-14 sm:py-20">
       <div className="mx-auto grid max-w-[1600px] gap-14 px-6 md:grid-cols-[1fr_1.1fr] md:px-12">
         <Reveal>
           <p className="eyebrow">The Studio</p>
@@ -697,7 +686,7 @@ export function TestimonialsLegacy() {
   }, []);
 
   return (
-    <section ref={root} id="reviews" className="relative overflow-hidden bg-ink py-28">
+    <section ref={root} id="reviews" className="relative overflow-hidden bg-ink py-14 sm:py-20">
       <div className="mx-auto grid max-w-[1600px] items-center gap-12 px-6 md:grid-cols-[0.8fr_1.2fr] md:gap-24 md:px-12">
         <Reveal>
           <div className="flex items-center gap-3">
@@ -975,7 +964,7 @@ export function FAQ() {
   const [openIndex, setOpenIndex] = useState(0);
 
   return (
-    <section id="faq" className="relative border-t border-sand/10 bg-ink py-28">
+    <section id="faq" className="relative border-t border-sand/10 bg-ink py-14 sm:py-20">
       <div className="mx-auto grid max-w-[1600px] gap-12 px-6 md:grid-cols-[0.8fr_1.2fr] md:gap-24 md:px-12">
         <Reveal>
           <p className="eyebrow">Frequently asked questions</p>
@@ -1025,9 +1014,9 @@ export function FAQ() {
   );
 }
 
-export function Contact() {
+export function Contact({ onEnquire }: { onEnquire?: () => void }) {
   return (
-    <section id="contact" className="relative bg-ink pb-16 pt-28">
+    <section id="contact" className="relative bg-ink pb-12 pt-14 sm:pt-20">
       <div className="mx-auto max-w-[1600px] px-6 md:px-12">
         <Reveal>
           <p className="eyebrow">Contact</p>
@@ -1039,23 +1028,31 @@ export function Contact() {
           <div>
             <p className="eyebrow">Studio</p>
             <p className="mt-3 text-sm leading-relaxed text-sand/70">
-              Please note: these details are placeholders — send me your real address, phone and
-              email and I'll swap them in.
+              Callisto Living — Luxury Interior Design Studio & Architectural Atelier.
             </p>
           </div>
           <div>
             <p className="eyebrow">Enquiries</p>
-            <p className="mt-3 text-sm text-sand/70">studio@callistoliving.example</p>
-            <p className="text-sm text-sand/70">+00 000 000 0000</p>
+            <p className="mt-3 text-sm text-sand/70">
+              <a href="mailto:info@callistoliving.in" className="hover:text-gold transition-colors">
+                info@callistoliving.in
+              </a>
+            </p>
+            <p className="mt-1 text-sm text-sand/70">
+              <a href="tel:08766926173" className="hover:text-gold transition-colors">
+                087669 26173
+              </a>
+            </p>
           </div>
           <div>
-            <a
-              href="mailto:studio@callistoliving.example"
+            <button
+              type="button"
+              onClick={onEnquire}
               {...hoverProps()}
-              className="inline-block border border-gold/60 px-8 py-4 text-[10px] uppercase tracking-[0.3em] text-gold transition-colors hover:bg-gold/15"
+              className="inline-block border border-gold/60 px-8 py-4 text-[10px] uppercase tracking-[0.3em] text-gold transition-colors hover:bg-gold/15 cursor-pointer"
             >
               Start a project
-            </a>
+            </button>
           </div>
         </Reveal>
         <div className="mt-20 flex flex-col md:flex-row items-center justify-between gap-6 border-t border-[#171817]/15 pt-8 pb-4 text-[#6E665C]">

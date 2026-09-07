@@ -49,15 +49,15 @@ const APPROACH_STEPS: ApproachStep[] = [
 
 export const ApproachSection: React.FC = () => {
   return (
-    <section className="relative bg-[#F3EFE7] py-28 md:py-36 text-[#171817]">
+    <section className="relative bg-[#F3EFE7] py-14 sm:py-20 md:py-24 text-[#171817]">
       <div className="mx-auto max-w-[1600px] px-6 lg:px-12">
         {/* EDITORIAL SECTION HEADER */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-end border-b border-[#171817]/15 pb-16">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-end border-b border-[#171817]/15 pb-8 sm:pb-10">
           <div className="lg:col-span-8">
             <span className="text-[10px] font-semibold uppercase tracking-[0.3em] text-[#DE1D25]">
               OUR APPROACH
             </span>
-            <h2 className="mt-4 font-display text-4xl sm:text-6xl md:text-7xl lg:text-8xl leading-[0.95] tracking-tight">
+            <h2 className="mt-3 font-display text-4xl sm:text-6xl md:text-7xl lg:text-8xl leading-[0.95] tracking-tight">
               DESIGNING <br />
               <span className="italic font-normal text-[#6E665C]">SPACES WITH</span> <br />
               PURPOSE.
@@ -71,7 +71,7 @@ export const ApproachSection: React.FC = () => {
         </div>
 
         {/* 4 EDITORIAL STAGES GRID */}
-        <div className="mt-20 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-12">
+        <div className="mt-8 sm:mt-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-12">
           {APPROACH_STEPS.map((step) => (
             <div
               key={step.number}
