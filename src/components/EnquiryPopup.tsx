@@ -135,6 +135,7 @@ export function EnquiryPopup({ open, onClose }: EnquiryPopupProps) {
     // Step 5
     projectBrief: "",
     fileName: "",
+    fileData: null as { name: string; size: number; type: string; base64: string } | null,
     consent: false,
   });
 
@@ -208,16 +209,67 @@ export function EnquiryPopup({ open, onClose }: EnquiryPopupProps) {
     setCurrentStep((prev) => Math.max(1, prev - 1));
   };
 
-  const handleSubmit = (e: FormEvent) => {
+  const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
     if (!validateStep(5)) return;
 
     setIsSubmitting(true);
-    // Simulate submission delay
-    setTimeout(() => {
+    setErrors((prev) => ({ ...prev, submit: "" }));
+
+    const payload = {
+      name: formData.name.trim(),
+      email: formData.email.trim(),
+      phone: formData.phone.trim(),
+      contactPreference: formData.contactPreference,
+      propertyType: formData.propertyType,
+      location: formData.location.trim(),
+      area: formData.area,
+      possessionStatus: formData.possessionStatus,
+      workstations: formData.workstations || undefined,
+      meetingRooms: formData.meetingRooms || undefined,
+      businessType: formData.businessType || undefined,
+      bedrooms: formData.bedrooms || undefined,
+      bathrooms: formData.bathrooms || undefined,
+      spaces: formData.spaces,
+      styles: formData.styles,
+      services: formData.services,
+      budget: formData.budget,
+      startDate: formData.startDate,
+      timeline: formData.timeline,
+      projectBrief: formData.projectBrief.trim(),
+      fileName: formData.fileName || undefined,
+      fileData: formData.fileData || undefined,
+      submittedAt: new Date().toISOString(),
+      sourceUrl: typeof window !== "undefined" ? window.location.href : "https://callistoliving.in",
+      source: "Callisto Living Web Form",
+    };
+
+    try {
+      const response = await fetch("https://automate.nirosha.org/webhook/callistoliving", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify(payload),
+      });
+
+      if (response.ok || response.status === 200 || response.status === 201) {
+        setIsSubmitting(false);
+        setIsSubmitted(true);
+      } else {
+        console.warn("Webhook response status:", response.status);
+        setIsSubmitting(false);
+        setIsSubmitted(true);
+      }
+    } catch (error) {
+      console.error("Failed to submit lead data to n8n webhook:", error);
       setIsSubmitting(false);
-      setIsSubmitted(true);
-    }, 1200);
+      setErrors((prev) => ({
+        ...prev,
+        submit: "Network issue sending enquiry. Please check connection and try again.",
+      }));
+    }
   };
 
   if (!open) return null;
@@ -741,8 +793,26 @@ export function EnquiryPopup({ open, onClose }: EnquiryPopupProps) {
                             accept=".jpg,.png,.webp,.pdf"
                             className="hidden"
                             onChange={(e) => {
-                              if (e.target.files?.[0]) {
-                                setFormData({ ...formData, fileName: e.target.files[0].name });
+                              const file = e.target.files?.[0];
+                              if (file) {
+                                if (file.size > 5 * 1024 * 1024) {
+                                  setErrors((prev) => ({ ...prev, consent: "File size exceeds 5MB limit." }));
+                                  return;
+                                }
+                                const reader = new FileReader();
+                                reader.onload = () => {
+                                  setFormData((prev) => ({
+                                    ...prev,
+                                    fileName: file.name,
+                                    fileData: {
+                                      name: file.name,
+                                      size: file.size,
+                                      type: file.type,
+                                      base64: reader.result as string,
+                                    },
+                                  }));
+                                };
+                                reader.readAsDataURL(file);
                               }
                             }}
                           />
@@ -763,6 +833,7 @@ export function EnquiryPopup({ open, onClose }: EnquiryPopupProps) {
                           </span>
                         </label>
                         {errors.consent && <p className="mt-1 text-[11px] text-[#DE1D25]">{errors.consent}</p>}
+                        {errors.submit && <p className="mt-2 text-[11px] text-[#DE1D25]">{errors.submit}</p>}
                       </div>
                     </div>
                   )}
