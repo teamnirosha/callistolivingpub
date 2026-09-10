@@ -17,34 +17,36 @@ const CATEGORIES = [
   "Commercial & Ateliers",
 ] as const;
 
+const REAL_TITLES = [
+  "Contemporary Residence Living Room",
+  "Master Bedroom Suite",
+  "Custom Oak Joinery",
+  "Luxury Kitchen & Marble Island",
+  "Modern Living Space",
+  "Architectural Interior Foyer",
+  "Linen Suite & Bedroom Design",
+  "Lighting & Architectural Detail",
+  "Penthouse Lounge & Dining",
+  "Private Estate Interior",
+];
+
+const LOCATIONS = ["Mumbai", "Pune", "Delhi NCR", "Bangalore", "Goa", "Alibaug", "Hyderabad"];
+
 // Map all 61 images from /Gallary/
 export const GALLERY_ITEMS: GalleryItem[] = Array.from({ length: 61 }, (_, i) => {
   const num = String(i + 1).padStart(3, "0");
   const cat = CATEGORIES[i % CATEGORIES.length];
-  
-  const titles = [
-    "Monolithic Living Atelier",
-    "Primary Suite Sanctuary",
-    "Smoked Walnut Joinery",
-    "Travertine Culinary Island",
-    "Sculptural Marble Lounge",
-    "Minimal Architectural Courtyard",
-    "Belgian Linen Bedroom Suite",
-    "Linear Brass & Light Gallery",
-    "White Oak Penthouse Salon",
-    "Private Estate Dining Room",
-  ];
-  
-  const locations = ["Mumbai", "Pune", "Delhi NCR", "Bangalore", "Goa", "Alibaug", "Hyderabad"];
-  
+  const title = REAL_TITLES[i % REAL_TITLES.length];
+  const location = LOCATIONS[i % LOCATIONS.length];
+
   return {
     id: `gallery-${num}`,
-    title: `${titles[i % titles.length]} No. ${num}`,
+    title: `${title}`,
     category: cat,
     image: `/Gallary/interior_design_${num}.jpeg`,
-    location: locations[i % locations.length],
-    year: "2024–2025",
-    description: "Bespoke interior architecture crafted with rare natural stone, artisan joinery, and tailored spatial proportions.",
+    location: location,
+    year: "2024",
+    description: "Bespoke interior architecture crafted with premium natural materials, artisan woodworking, and tailored spatial proportions.",
   };
 });
 

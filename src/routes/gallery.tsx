@@ -25,7 +25,7 @@ function GalleryPage() {
   const [isEnquiryOpen, setIsEnquiryOpen] = useState(false);
 
   return (
-    <div className="relative bg-[#F3EFE7] text-[#171817] overflow-x-hidden w-full max-w-[100vw]">
+    <div className="relative bg-[#F3EFE7] text-[#171817] min-h-screen overflow-x-hidden w-full max-w-[100vw]">
       <CustomCursor />
       <Navbar onEnquire={() => setIsEnquiryOpen(true)} />
       <EnquiryPopup open={isEnquiryOpen} onClose={() => setIsEnquiryOpen(false)} />

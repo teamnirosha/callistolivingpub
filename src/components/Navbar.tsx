@@ -56,10 +56,8 @@ export function Navbar({ onEnquire }: NavbarProps) {
 
   return (
     <header
-      className={`fixed inset-x-0 top-0 z-[100] transition-all duration-500 ${
-        scrolled
-          ? "bg-[#F3EFE7]/92 backdrop-blur-md border-b border-[#171817]/10 py-3 shadow-xs text-[#171817]"
-          : "bg-gradient-to-b from-black/70 via-black/25 to-transparent py-4 text-white"
+      className={`fixed inset-x-0 top-0 z-[100] transition-all duration-500 bg-[#F3EFE7]/95 backdrop-blur-md border-b border-[#171817]/10 text-[#171817] ${
+        scrolled ? "py-3 shadow-md" : "py-4 shadow-xs"
       }`}
     >
       <nav className="mx-auto flex max-w-[1600px] items-center justify-between px-6 lg:px-12">
@@ -70,7 +68,7 @@ export function Navbar({ onEnquire }: NavbarProps) {
           className="group flex items-center transition-opacity hover:opacity-90"
         >
           <CallistoLogo
-            variant={scrolled ? "dark" : "light"}
+            variant="dark"
             height={42}
             hideTaglineOnMobile={true}
           />
@@ -84,11 +82,7 @@ export function Navbar({ onEnquire }: NavbarProps) {
               to={link.to}
               hash={link.hash}
               onClick={(e) => handleNavClick(e, link.to, link.hash)}
-              className={`relative py-1 text-[11px] uppercase tracking-[0.2em] font-medium transition-colors duration-300 group ${
-                scrolled
-                  ? "text-[#171817]/80 hover:text-[#DE1D25]"
-                  : "text-white/85 hover:text-white"
-              }`}
+              className="relative py-1 text-[11px] uppercase tracking-[0.2em] font-semibold transition-colors duration-300 group text-[#171817]/80 hover:text-[#DE1D25]"
             >
               {link.label}
               {/* Red Hover Underline */}
@@ -103,11 +97,7 @@ export function Navbar({ onEnquire }: NavbarProps) {
             <button
               type="button"
               onClick={onEnquire}
-              className={`group inline-flex items-center gap-2 border px-5 py-2.5 text-[11px] font-semibold uppercase tracking-[0.2em] transition-all duration-300 cursor-pointer ${
-                scrolled
-                  ? "border-[#171817] bg-[#171817] text-[#F3EFE7] hover:bg-[#DE1D25] hover:border-[#DE1D25]"
-                  : "border-white/40 bg-white/10 backdrop-blur-xs text-white hover:bg-white hover:text-[#171817] hover:border-white"
-              }`}
+              className="group inline-flex items-center gap-2 border border-[#171817] bg-[#171817] px-5 py-2.5 text-[11px] font-semibold uppercase tracking-[0.2em] text-[#F3EFE7] transition-all duration-300 hover:bg-[#DE1D25] hover:border-[#DE1D25] hover:text-white cursor-pointer shadow-xs"
             >
               <span>ENQUIRE NOW</span>
               <span className="transition-transform duration-300 group-hover:translate-x-1">→</span>
@@ -125,26 +115,26 @@ export function Navbar({ onEnquire }: NavbarProps) {
           >
             <div className="flex flex-col gap-1.5 w-6">
               <span
-                className={`h-0.5 w-full transition-transform duration-300 ${
-                  scrolled ? "bg-[#171817]" : "bg-white"
-                } ${mobileMenuOpen ? "rotate-45 translate-y-2" : ""}`}
+                className={`h-0.5 w-full bg-[#171817] transition-transform duration-300 ${
+                  mobileMenuOpen ? "rotate-45 translate-y-2" : ""
+                }`}
               />
               <span
-                className={`h-0.5 w-full transition-opacity duration-300 ${
-                  scrolled ? "bg-[#171817]" : "bg-white"
-                } ${mobileMenuOpen ? "opacity-0" : "opacity-100"}`}
+                className={`h-0.5 w-full bg-[#171817] transition-opacity duration-300 ${
+                  mobileMenuOpen ? "opacity-0" : "opacity-100"
+                }`}
               />
               <span
-                className={`h-0.5 w-full transition-transform duration-300 ${
-                  scrolled ? "bg-[#171817]" : "bg-white"
-                } ${mobileMenuOpen ? "-rotate-45 -translate-y-2" : ""}`}
+                className={`h-0.5 w-full bg-[#171817] transition-transform duration-300 ${
+                  mobileMenuOpen ? "-rotate-45 -translate-y-2" : ""
+                }`}
               />
             </div>
           </button>
         </div>
       </nav>
 
-      {/* FULL-SCREEN MOBILE OVERLAY MENU — SOLID BLACK OPAQUE BACKGROUND */}
+      {/* FULL-SCREEN MOBILE OVERLAY MENU */}
       {mobileMenuOpen && (
         <div className="fixed inset-0 z-[200] flex flex-col justify-between bg-[#171817] px-6 sm:px-8 pt-6 pb-10 text-[#F3EFE7] animate-in fade-in duration-200 lg:hidden w-screen h-screen overflow-y-auto">
           <div className="flex items-center justify-between border-b border-[#F3EFE7]/15 pb-6">

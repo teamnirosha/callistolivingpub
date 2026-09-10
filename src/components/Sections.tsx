@@ -2,7 +2,7 @@ import { Link } from "@tanstack/react-router";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useEffect, useRef, useState } from "react";
-import { Armchair, BedDouble, ChevronDown, CookingPot, Monitor, Star } from "lucide-react";
+import { Armchair, BedDouble, ChevronDown, CookingPot, MapPin, Monitor, Star } from "lucide-react";
 import apartment from "@/assets/project-apartment.webp";
 import blackHouse from "@/assets/project-black-house.webp";
 import minimal from "@/assets/project-minimal.webp";
@@ -267,7 +267,7 @@ export function RoomPlanner({ onEnquire }: { onEnquire?: () => void }) {
           <div className="flex flex-wrap items-end justify-between gap-6">
             <div>
               <p className="eyebrow text-gold font-medium tracking-[0.25em]">
-                02 — Spatial Atelier
+                02 | Spatial Design
               </p>
               <h2 className="mt-4 max-w-3xl font-display text-4xl leading-tight text-sand md:text-6xl lg:text-7xl">
                 Interior spaces, crafted to <span className="italic text-gold">perfection.</span>
@@ -453,7 +453,7 @@ export function MaterialSection() {
     <section className="relative border-t border-sand/10 py-14 sm:py-20">
       <div className="mx-auto grid max-w-[1600px] gap-12 px-6 md:grid-cols-2 md:px-12">
         <Reveal>
-          <p className="eyebrow">07 — Materiality</p>
+          <p className="eyebrow">07 | Materiality</p>
           <h2 className="mt-4 font-display text-5xl leading-tight text-sand md:text-7xl">
             Explore <span className="italic text-gold">Materials</span>
           </h2>
@@ -555,7 +555,7 @@ function ProjectCard({ project, index }: { project: (typeof PROJECTS)[number]; i
         <div className="relative overflow-hidden bg-ink">
           <img
             src={project.image}
-            alt={`${project.title} — interior design by Callisto Living`}
+            alt={`${project.title} | Interior design by Callisto Living`}
             loading="lazy"
             width={1200}
             height={1500}
@@ -563,7 +563,7 @@ function ProjectCard({ project, index }: { project: (typeof PROJECTS)[number]; i
           />
           <div className="absolute inset-0 bg-gradient-to-t from-ink/85 via-transparent to-transparent" />
           <div className="card-title absolute bottom-6 left-6 right-6">
-            <p className="eyebrow">{`${project.location} — ${project.year}`}</p>
+            <p className="eyebrow">{`${project.location} | ${project.year}`}</p>
             <h3 className="mt-2 font-display text-3xl text-sand md:text-4xl">{project.title}</h3>
           </div>
         </div>
@@ -1015,8 +1015,28 @@ export function FAQ() {
 }
 
 export function Contact({ onEnquire }: { onEnquire?: () => void }) {
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "InteriorDesignStudio",
+    "name": "Callisto Living",
+    "telephone": "+91 87669 26173",
+    "email": "info@callistoliving.in",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "FG 1002, Silver Stone, Handewadi Road",
+      "addressLocality": "Handewadi, Pune",
+      "addressRegion": "Maharashtra",
+      "postalCode": "412308",
+      "addressCountry": "IN"
+    }
+  };
+
   return (
     <section id="contact" className="relative bg-ink pb-12 pt-14 sm:pt-20">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       <div className="mx-auto max-w-[1600px] px-6 md:px-12">
         <Reveal>
           <p className="eyebrow">Contact</p>
@@ -1024,27 +1044,48 @@ export function Contact({ onEnquire }: { onEnquire?: () => void }) {
             Begin your <span className="italic text-gold">residence</span>
           </h2>
         </Reveal>
-        <Reveal className="mt-16 grid gap-12 border-t border-sand/10 pt-12 md:grid-cols-3">
+        <Reveal className="mt-16 grid gap-10 border-t border-sand/10 pt-12 sm:grid-cols-2 lg:grid-cols-4">
           <div>
             <p className="eyebrow">Studio</p>
             <p className="mt-3 text-sm leading-relaxed text-sand/70">
-              Callisto Living — Luxury Interior Design Studio & Architectural Atelier.
+              Callisto Living | Luxury Interior Design Studio & Architectural Atelier.
             </p>
+          </div>
+          <div>
+            <p className="eyebrow">Official Address</p>
+            <address className="mt-3 not-italic text-sm leading-relaxed text-sand/70">
+              <span className="block font-medium text-sand">FG 1002, Silver Stone</span>
+              Handewadi Road, Handewadi<br />
+              Pune, Maharashtra 412308
+            </address>
+            <a
+              href="https://maps.google.com/?q=Silver+Stone+Handewadi+Road+Handewadi+Pune+412308"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-3 inline-flex items-center gap-1.5 text-[11px] font-medium uppercase tracking-wider text-gold hover:text-sand transition-colors"
+            >
+              <MapPin className="w-3.5 h-3.5 shrink-0" />
+              <span>Get Directions</span>
+            </a>
           </div>
           <div>
             <p className="eyebrow">Enquiries</p>
             <p className="mt-3 text-sm text-sand/70">
-              <a href="mailto:info@callistoliving.in" className="hover:text-gold transition-colors">
+              <a href="mailto:info@callistoliving.in" className="hover:text-gold transition-colors block">
                 info@callistoliving.in
               </a>
             </p>
-            <p className="mt-1 text-sm text-sand/70">
-              <a href="tel:08766926173" className="hover:text-gold transition-colors">
-                087669 26173
+            <p className="mt-1.5 text-sm text-sand/70">
+              <a href="tel:08766926173" className="hover:text-gold transition-colors block">
+                +91 87669 26173
               </a>
             </p>
           </div>
           <div>
+            <p className="eyebrow">Consultation</p>
+            <p className="mt-3 text-xs text-sand/60 leading-relaxed mb-4">
+              Schedule a personalized design consultation for your luxury space.
+            </p>
             <button
               type="button"
               onClick={onEnquire}
@@ -1059,7 +1100,7 @@ export function Contact({ onEnquire }: { onEnquire?: () => void }) {
           <div className="flex items-center gap-4">
             <CallistoLogo variant="full-color" height={32} />
             <span className="text-[10px] uppercase tracking-[0.2em] text-[#6E665C]">
-              © {new Date().getFullYear()} — Premium Interior Studio
+              © {new Date().getFullYear()} | Premium Interior Studio
             </span>
           </div>
 
