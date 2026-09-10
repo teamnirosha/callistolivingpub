@@ -18,8 +18,8 @@ function sample(t: number, key: "pos" | "look", out: THREE.Vector3) {
   const f = THREE.MathUtils.clamp(t, 0, 1) * n;
   const i = Math.min(Math.floor(f), n - 1);
   const k = THREE.MathUtils.smoothstep(f - i, 0, 1);
-  const a = WAYPOINTS[i][key];
-  const b = WAYPOINTS[i + 1][key];
+  const a = WAYPOINTS[i]![key];
+  const b = WAYPOINTS[i + 1]![key];
   return out.set(
     THREE.MathUtils.lerp(a[0], b[0], k),
     THREE.MathUtils.lerp(a[1], b[1], k),

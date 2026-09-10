@@ -54,13 +54,13 @@ export function GalleryLightbox({
 
   const handlePrev = () => {
     const prevIdx = (currentIndex - 1 + items.length) % items.length;
-    onSelect(items[prevIdx]);
+    if (items[prevIdx]) onSelect(items[prevIdx]!);
     setCopied(false);
   };
 
   const handleNext = () => {
     const nextIdx = (currentIndex + 1) % items.length;
-    onSelect(items[nextIdx]);
+    if (items[nextIdx]) onSelect(items[nextIdx]!);
     setCopied(false);
   };
 

@@ -16,16 +16,7 @@ export const ProjectShowcase: React.FC = () => {
       <div className="mx-auto w-full max-w-[1600px] px-6 lg:px-12">
         {/* COMPACT EDITORIAL INTRO HEADER - FITS IN ONE VIEWPORT */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 lg:gap-8 items-end pb-5 lg:pb-6 border-b border-[#F3EFE7]/15">
-          {/* LEFT: Eyebrow + 2-Line Editorial Heading */}
-          <div className="lg:col-span-7">
-            <span className="text-[10px] sm:text-[11px] font-semibold uppercase tracking-[0.25em] text-[#DE1D25] block mb-2">
-              SELECTED PORTFOLIO
-            </span>
-            <h2 className="font-display text-4xl sm:text-6xl md:text-7xl lg:text-[5.5rem] xl:text-[6.2rem] leading-[0.84] tracking-tight text-[#F3EFE7]">
-              <span className="block">ARCHITECTURAL</span>
-              <span className="block font-normal italic text-[#C5B7A7]">WORKS</span>
-            </h2>
-          </div>
+
 
           {/* RIGHT: Compact Description */}
           <div className="lg:col-span-5 lg:pl-4">

@@ -136,12 +136,12 @@ function RoomBlock({
           emissiveIntensity={hovered || active ? 0.16 : 0}
         />
       </mesh>
-      {[
+      {([
         [0, -room.d / 2, room.w, 0.12],
         [0, room.d / 2, room.w, 0.12],
         [-room.w / 2, 0, 0.12, room.d],
         [room.w / 2, 0, 0.12, room.d],
-      ].map(([x, z, w, d], i) => (
+      ] as [number, number, number, number][]).map(([x, z, w, d], i) => (
         <mesh key={i} position={[x, wallH / 2, z]} castShadow receiveShadow>
           <boxGeometry args={[w, wallH, d]} />
           <meshStandardMaterial color="#efe7d8" roughness={0.9} />

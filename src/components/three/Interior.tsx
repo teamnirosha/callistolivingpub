@@ -55,7 +55,7 @@ function Box({
   return (
     <mesh
       position={position}
-      rotation={rotation}
+      rotation={rotation ?? [0, 0, 0]}
       castShadow
       receiveShadow
       {...(info ? handlers : {})}
@@ -249,11 +249,13 @@ function Curtain({ position }: { position: [number, number, number] }) {
   const ref = useRef<THREE.Mesh>(null);
   const geo = useMemo(() => {
     const g = new THREE.PlaneGeometry(2.2, 5, 12, 2);
-    const pos = g.attributes.position;
-    for (let i = 0; i < pos.count; i++) {
-      const x = pos.getX(i);
-      const y = pos.getY(i);
-      pos.setZ(i, Math.sin(x * 3.5) * 0.1 * ((5 - (y + 2.5)) / 5 + 0.3));
+    const pos = g.attributes["position"];
+    if (pos) {
+      for (let i = 0; i < pos.count; i++) {
+        const x = pos.getX(i);
+        const y = pos.getY(i);
+        pos.setZ(i, Math.sin(x * 3.5) * 0.1 * ((5 - (y + 2.5)) / 5 + 0.3));
+      }
     }
     g.computeVertexNormals();
     return g;
@@ -291,7 +293,7 @@ function Artwork({
   const info = { title: "Artwork", lines: ["Commissioned canvas", "Oil on linen, 2024"] };
   const handlers = useInteractive(info);
   return (
-    <group position={position} rotation={rotation}>
+    <group position={position} rotation={rotation ?? [0, 0, 0]}>
       <mesh castShadow {...handlers}>
         <boxGeometry args={[2.6, 1.7, 0.08]} />
         <meshStandardMaterial color="#241f1b" roughness={0.6} />

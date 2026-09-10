@@ -14,7 +14,7 @@ const CATEGORIES = [
   "Primary Suites",
   "Kitchens & Dining",
   "Bespoke Joinery",
-  "Architectural Details",
+  "Interior Details",
   "Commercial & Ateliers",
 ] as const;
 
@@ -35,13 +35,13 @@ export const GallerySection: React.FC<GallerySectionProps> = ({ onEnquire, isFul
         {/* SECTION HEADING */}
         <div className="flex flex-col items-center justify-center text-center mb-10 border-b border-[#171817]/15 pb-8">
           <span className="text-[10px] font-semibold uppercase tracking-[0.3em] text-[#DE1D25]">
-            ARCHITECTURAL PORTFOLIO
+            INTERIOR DESIGN PORTFOLIO
           </span>
           <h2 className="mt-2 font-display text-4xl sm:text-5xl md:text-6xl font-light text-[#171817] tracking-wider">
             GALLERY
           </h2>
           <p className="mt-3 max-w-xl text-xs sm:text-sm text-[#171817]/70 leading-relaxed font-light">
-            Curated archive of bespoke luxury residences, interior architecture, and fine joinery.
+            Curated archive of bespoke luxury residences, spatial interiors, and fine joinery.
           </p>
 
           {/* CATEGORY FILTER TABS (FULL GALLERY PAGE ONLY) */}
@@ -129,7 +129,7 @@ export const GallerySection: React.FC<GallerySectionProps> = ({ onEnquire, isFul
               href="/gallery"
               className="inline-flex items-center gap-3 border border-[#171817] bg-[#171817] px-8 py-4 text-xs font-semibold uppercase tracking-[0.2em] text-[#F3EFE7] transition-all hover:bg-[#DE1D25] hover:border-[#DE1D25] hover:text-white cursor-pointer shadow-lg"
             >
-              <span>EXPLORE FULL ARCHITECTURAL GALLERY ({GALLERY_ITEMS.length - 4} MORE) →</span>
+              <span>EXPLORE FULL INTERIOR DESIGN GALLERY ({GALLERY_ITEMS.length - 4} MORE) →</span>
             </a>
           </div>
         )}
@@ -140,7 +140,7 @@ export const GallerySection: React.FC<GallerySectionProps> = ({ onEnquire, isFul
           items={GALLERY_ITEMS}
           onClose={() => setSelectedLightboxItem(null)}
           onSelect={(item) => setSelectedLightboxItem(item)}
-          onEnquire={onEnquire}
+          {...(onEnquire ? { onEnquire } : {})}
         />
       </div>
     </section>

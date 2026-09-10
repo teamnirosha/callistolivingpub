@@ -30,6 +30,7 @@ export default defineConfig({
             if (id.includes("node_modules/gsap/")) return "gsap";
             // Keep lucide icons in their own chunk
             if (id.includes("node_modules/lucide-react/")) return "lucide";
+            return undefined;
           },
         },
       },

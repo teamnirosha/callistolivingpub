@@ -138,7 +138,7 @@ export function Journey({ onProgress }: { onProgress: (p: number) => void }) {
     return () => st.kill();
   }, [onProgress]);
 
-  const room = JOURNEY[index];
+  const room = JOURNEY[index] ?? JOURNEY[0]!;
 
   return (
     <div ref={root} className="relative h-[560vh]">
@@ -252,8 +252,8 @@ const ROOM_COLLECTIONS = [
 ];
 
 export function RoomPlanner({ onEnquire }: { onEnquire?: () => void }) {
-  const [activeId, setActiveId] = useState(ROOM_COLLECTIONS[0].id);
-  const active = ROOM_COLLECTIONS.find((room) => room.id === activeId) ?? ROOM_COLLECTIONS[0];
+  const [activeId, setActiveId] = useState(ROOM_COLLECTIONS[0]!.id);
+  const active = ROOM_COLLECTIONS.find((room) => room.id === activeId) ?? ROOM_COLLECTIONS[0]!;
 
   return (
     <section

@@ -16,9 +16,9 @@ const APPROACH_STEPS: ApproachStep[] = [
   {
     number: "01",
     title: "DISCOVER",
-    subtitle: "Vision & Spatial Architecture",
+    subtitle: "Vision & Spatial Design",
     description:
-      "We immerse in your lifestyle, exploring materials, lighting, and spatial acoustics to define a clear architectural blueprint tailored to your aspirations.",
+      "We immerse in your lifestyle, exploring materials, lighting, and spatial acoustics to define a clear interior design blueprint tailored to your aspirations.",
     image: approachDiscover,
   },
   {
@@ -65,7 +65,7 @@ export const ApproachSection: React.FC = () => {
           </div>
           <div className="lg:col-span-4 lg:pl-6">
             <p className="text-base text-[#6E665C] leading-relaxed font-light">
-              Our holistic design philosophy bridges architectural intelligence with bespoke interior craftsmanship, yielding spaces that evoke emotion and stand timeless.
+              Our holistic design philosophy bridges spatial interior intelligence with bespoke craftsmanship, yielding spaces that evoke emotion and stand timeless.
             </p>
           </div>
         </div>

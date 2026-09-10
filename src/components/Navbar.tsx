@@ -80,7 +80,7 @@ export function Navbar({ onEnquire }: NavbarProps) {
             <Link
               key={link.label}
               to={link.to}
-              hash={link.hash}
+              {...(link.hash ? { hash: link.hash } : {})}
               onClick={(e) => handleNavClick(e, link.to, link.hash)}
               className="relative py-1 text-[11px] uppercase tracking-[0.2em] font-semibold transition-colors duration-300 group text-[#171817]/80 hover:text-[#DE1D25]"
             >
@@ -153,7 +153,7 @@ export function Navbar({ onEnquire }: NavbarProps) {
               <Link
                 key={link.label}
                 to={link.to}
-                hash={link.hash}
+                {...(link.hash ? { hash: link.hash } : {})}
                 onClick={(e) => handleNavClick(e, link.to, link.hash)}
                 className="font-display text-3xl sm:text-4xl tracking-wide text-[#F3EFE7] transition-colors hover:text-[#DE1D25]"
               >

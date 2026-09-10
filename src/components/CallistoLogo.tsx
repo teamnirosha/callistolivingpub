@@ -7,6 +7,7 @@ interface CallistoLogoProps {
   variant?: "light" | "dark" | "full-color";
   markOnly?: boolean;
   height?: number | string;
+  hideTaglineOnMobile?: boolean;
 }
 
 export const CallistoLogo: React.FC<CallistoLogoProps> = ({
@@ -14,6 +15,7 @@ export const CallistoLogo: React.FC<CallistoLogoProps> = ({
   variant = "full-color",
   markOnly = false,
   height = 42,
+  hideTaglineOnMobile = false,
 }) => {
   if (markOnly) {
     return (

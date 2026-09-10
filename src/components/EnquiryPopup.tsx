@@ -5,6 +5,7 @@ import { CallistoLogo } from "./CallistoLogo";
 type EnquiryPopupProps = {
   open: boolean;
   onClose: () => void;
+  defaultService?: string;
 };
 
 const STEPS = [
@@ -69,7 +70,7 @@ const DESIGN_STYLES = [
 
 const SERVICES_OPTIONS = [
   "Interior Design",
-  "Architecture",
+  "Full Home Interior",
   "Turnkey Execution",
   "Furniture & Custom Joinery",
   "Lighting Design",
@@ -102,7 +103,16 @@ const TIMELINES = [
   "Not Sure",
 ];
 
-export function EnquiryPopup({ open, onClose }: EnquiryPopupProps) {
+interface FormErrors {
+  name?: string;
+  email?: string;
+  phone?: string;
+  location?: string;
+  consent?: string;
+  submit?: string;
+}
+
+export const EnquiryPopup: React.FC<EnquiryPopupProps> = ({ open, onClose, defaultService }) => {
   const titleId = useId();
   const [currentStep, setCurrentStep] = useState(1);
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -127,7 +137,7 @@ export function EnquiryPopup({ open, onClose }: EnquiryPopupProps) {
     // Step 3
     spaces: [] as string[],
     styles: [] as string[],
-    services: [] as string[],
+    services: defaultService ? [defaultService] : [] as string[],
     // Step 4
     budget: "₹20–40 Lakh",
     startDate: "Within 1–3 Months",
@@ -139,7 +149,7 @@ export function EnquiryPopup({ open, onClose }: EnquiryPopupProps) {
     consent: false,
   });
 
-  const [errors, setErrors] = useState<Record<string, string>>({});
+  const [errors, setErrors] = useState<FormErrors>({});
 
   // Prevent background scrolling when modal is open
   useEffect(() => {
@@ -177,7 +187,7 @@ export function EnquiryPopup({ open, onClose }: EnquiryPopupProps) {
   };
 
   const validateStep = (step: number): boolean => {
-    const errs: Record<string, string> = {};
+    const errs: FormErrors = {};
 
     if (step === 1) {
       if (!formData.name.trim()) errs.name = "Full name is required";
@@ -363,7 +373,7 @@ export function EnquiryPopup({ open, onClose }: EnquiryPopupProps) {
                   CALLISTO LIVING STUDIO
                 </p>
                 <p className="mt-0.5 text-[11px] text-[#F3EFE7]/60 font-light">
-                  Tailored Interior Architecture & Consultation
+                  Tailored Interior Design & Consultation
                 </p>
               </div>
             </div>
@@ -375,7 +385,7 @@ export function EnquiryPopup({ open, onClose }: EnquiryPopupProps) {
                 {/* Mobile Compact Progress Bar */}
                 <div className="flex items-center justify-between mb-3 lg:hidden">
                   <span className="text-[10px] font-semibold uppercase tracking-[0.2em] text-[#DE1D25]">
-                    STEP 0{currentStep} / 05 — {STEPS[currentStep - 1].label}
+                    STEP 0{currentStep} / 05 — {STEPS[currentStep - 1]?.label || ""}
                   </span>
                   <div className="flex gap-1">
                     {STEPS.map((s) => (

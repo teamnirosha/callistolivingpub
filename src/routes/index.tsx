@@ -4,14 +4,15 @@ import { CustomCursor } from "@/components/CustomCursor";
 import { Navbar } from "@/components/Navbar";
 import { EnquiryPopup } from "@/components/EnquiryPopup";
 import { HeroSection } from "@/components/HeroSection";
+import { HeroTrustAndBrands } from "@/components/HeroTrustAndBrands";
 import { ApproachSection } from "@/components/ApproachSection";
 import { ProjectShowcase } from "@/components/ProjectShowcase";
 import { GallerySection } from "@/components/GallerySection";
+import { CallistoPromisesAndServices } from "@/components/CallistoPromisesAndServices";
 import {
   About,
   Contact,
   FAQ,
-  MaterialSection,
   Services,
   Testimonials,
 } from "@/components/Sections";
@@ -24,13 +25,13 @@ export const Route = createFileRoute("/")({
       {
         name: "description",
         content:
-          "Callisto Living creates timeless luxury interiors through architecture, bespoke craftsmanship, and thoughtful design.",
+          "Callisto Living creates timeless luxury interiors through bespoke craftsmanship, spatial elegance, and thoughtful interior design.",
       },
       { property: "og:title", content: "Callisto Living | Premium Interior Design Studio" },
       {
         property: "og:description",
         content:
-          "Callisto Living creates timeless luxury interiors through architecture, bespoke craftsmanship, and thoughtful design.",
+          "Callisto Living creates timeless luxury interiors through bespoke craftsmanship, spatial elegance, and thoughtful interior design.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
@@ -59,11 +60,10 @@ function Home() {
 
       <main className="relative z-10 overflow-x-hidden w-full max-w-[100vw]">
         <HeroSection onEnquire={() => setIsEnquiryOpen(true)} />
+        <HeroTrustAndBrands />
         <ApproachSection />
-        <ProjectShowcase />
         <GallerySection onEnquire={() => setIsEnquiryOpen(true)} />
-        <MaterialSection />
-        <Services />
+        <CallistoPromisesAndServices onEnquire={() => setIsEnquiryOpen(true)} />
         <About />
         <Testimonials />
         <FAQ />

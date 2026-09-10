@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 180 50">
+  <path d="M 12 34 C 4 24, 6 12, 16 10 C 22 8, 28 12, 30 18 C 34 10, 42 8, 48 12 C 56 18, 54 32, 44 38 L 30 46 Z" fill="#00833E" />
+  <path d="M 30 18 L 30 44" stroke="#FFFFFF" stroke-width="2.5" stroke-linecap="round" />
+  <text x="58" y="34" font-family="'Plus Jakarta Sans', Arial, sans-serif" font-weight="900" font-size="22" fill="#00833E" letter-spacing="-0.5">Greenply</text>
+</svg>

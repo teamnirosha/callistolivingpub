@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 50">
+  <circle cx="22" cy="25" r="14" fill="#362D83" />
+  <path d="M 22 13 C 28 13 32 18 32 25 C 32 32 22 37 22 37 Z" fill="#F37023" />
+  <circle cx="22" cy="25" r="5" fill="#FFFFFF" />
+  <text x="44" y="33" font-family="'Plus Jakarta Sans', sans-serif" font-weight="800" font-size="22" fill="#362D83">Pidilite</text>
+</svg>
