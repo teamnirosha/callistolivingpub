@@ -52,6 +52,20 @@ function Home() {
     return () => window.clearTimeout(timer);
   }, []);
 
+  // Handle hash scrolling on page load or when navigating with hash
+  useEffect(() => {
+    if (typeof window !== "undefined" && window.location.hash) {
+      const hash = window.location.hash.replace("#", "");
+      const timer = window.setTimeout(() => {
+        const el = document.getElementById(hash);
+        if (el) {
+          el.scrollIntoView({ behavior: "smooth", block: "start" });
+        }
+      }, 150);
+      return () => window.clearTimeout(timer);
+    }
+  }, []);
+
   return (
     <div className="relative bg-[#F3EFE7] text-[#171817] overflow-x-hidden w-full max-w-[100vw]">
       <CustomCursor />
@@ -62,6 +76,7 @@ function Home() {
         <HeroSection onEnquire={() => setIsEnquiryOpen(true)} />
         <HeroTrustAndBrands />
         <ApproachSection />
+        <ProjectShowcase />
         <GallerySection onEnquire={() => setIsEnquiryOpen(true)} />
         <CallistoPromisesAndServices onEnquire={() => setIsEnquiryOpen(true)} />
         <About />

@@ -2,26 +2,26 @@ import React from "react";
 import { Link } from "@tanstack/react-router";
 import { PROJECTS } from "@/lib/projects";
 
-const CATEGORIES: Record<string, string> = {
-  "the-black-house": "Residential Architecture",
-  "modern-minimal-residence": "Interior Architecture",
-  "contemporary-villa": "Private Estate",
-  "luxury-apartment": "Penthouse Residence",
-  "boutique-office": "Boutique Workspace",
-};
-
 export const ProjectShowcase: React.FC = () => {
   return (
-    <section id="projects" className="relative bg-[#171817] pt-12 md:pt-16 pb-24 text-[#F3EFE7] min-h-screen flex flex-col justify-start">
+    <section id="projects" className="relative bg-[#171817] pt-12 md:pt-16 pb-24 text-[#F3EFE7] min-h-screen flex flex-col justify-start scroll-mt-20">
       <div className="mx-auto w-full max-w-[1600px] px-6 lg:px-12">
         {/* COMPACT EDITORIAL INTRO HEADER - FITS IN ONE VIEWPORT */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 lg:gap-8 items-end pb-5 lg:pb-6 border-b border-[#F3EFE7]/15">
-
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-end pb-6 sm:pb-8 border-b border-[#F3EFE7]/15">
+          {/* LEFT: Section Title */}
+          <div className="lg:col-span-7">
+            <span className="text-[10px] font-semibold uppercase tracking-[0.3em] text-[#DE1D25] block mb-2 sm:mb-3">
+              FEATURED PORTFOLIO
+            </span>
+            <h2 className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-light text-[#F3EFE7] tracking-tight leading-[0.95]">
+              SELECTED <span className="italic font-normal text-[#C5B7A7]">PROJECTS</span>
+            </h2>
+          </div>
 
           {/* RIGHT: Compact Description */}
           <div className="lg:col-span-5 lg:pl-4">
-            <p className="max-w-[480px] text-xs sm:text-sm md:text-base text-[#F3EFE7]/75 font-light leading-[1.5]">
-              A curated collection of bespoke residential estates, luxury penthouses, and minimal architectural sanctuaries across the globe.
+            <p className="max-w-[480px] text-xs sm:text-sm md:text-base text-[#F3EFE7]/75 font-light leading-[1.6]">
+              A curated collection of bespoke residential interiors, luxury penthouses, and minimal living sanctuaries crafted with fine joinery and artisan materials.
             </p>
           </div>
         </div>
@@ -29,7 +29,7 @@ export const ProjectShowcase: React.FC = () => {
         {/* FEATURED PROJECT LIST - FIRST IMAGE APPEARS IMMEDIATELY */}
         <div className="mt-6 md:mt-8 space-y-12 md:space-y-16">
           {PROJECTS.map((project, idx) => {
-            const category = CATEGORIES[project.slug] || "Luxury Interior";
+            const category = project.category || "Luxury Interior Design";
             const isFeatured = idx === 0;
 
             return (
@@ -59,8 +59,8 @@ export const ProjectShowcase: React.FC = () => {
                 </Link>
 
                 {/* Project Metadata Bar */}
-                <div className="mt-4 flex flex-wrap items-baseline justify-between border-b border-[#F3EFE7]/10 pb-5 gap-3">
-                  <div>
+                <div className="mt-4 flex flex-col md:flex-row md:items-baseline justify-between border-b border-[#F3EFE7]/10 pb-6 gap-4">
+                  <div className="max-w-3xl">
                     <div className="flex items-center gap-2.5 text-[10px] uppercase tracking-[0.2em] text-[#C5B7A7] font-medium">
                       <span>{category}</span>
                       <span>•</span>
@@ -71,9 +71,12 @@ export const ProjectShowcase: React.FC = () => {
                         {project.title}
                       </Link>
                     </h3>
+                    <p className="mt-2 text-xs sm:text-sm text-[#F3EFE7]/70 font-light leading-relaxed">
+                      {project.intro}
+                    </p>
                   </div>
 
-                  <div className="flex items-center gap-6">
+                  <div className="flex items-center gap-6 shrink-0 pt-2 md:pt-0">
                     <span className="text-xs font-mono text-[#F3EFE7]/50">
                       {project.year}
                     </span>

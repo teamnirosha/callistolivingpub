@@ -21,7 +21,6 @@ const PROPERTY_TYPES = [
   "Villa",
   "Bungalow",
   "Penthouse",
-  "Office",
   "Retail / Commercial",
   "Other",
 ];
@@ -190,11 +189,23 @@ export const EnquiryPopup: React.FC<EnquiryPopupProps> = ({ open, onClose, defau
     const errs: FormErrors = {};
 
     if (step === 1) {
-      if (!formData.name.trim()) errs.name = "Full name is required";
-      if (!formData.email.trim() || !/\S+@\S+\.\S+/.test(formData.email))
-        errs.email = "Valid email is required";
-      if (!formData.phone.trim() || formData.phone.trim().length < 8)
-        errs.phone = "Valid phone number is required";
+      if (!formData.name.trim()) {
+        errs.name = "Full name is required";
+      }
+
+      const emailTrimmed = formData.email.trim();
+      if (!emailTrimmed) {
+        errs.email = "Email address is required";
+      } else if (!emailTrimmed.includes("@") || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailTrimmed)) {
+        errs.email = "Please enter a valid email address with '@' (e.g. name@domain.com)";
+      }
+
+      const phoneClean = formData.phone.trim().replace(/\D/g, "");
+      if (!phoneClean) {
+        errs.phone = "Mobile number is required";
+      } else if (phoneClean.length !== 10) {
+        errs.phone = "Please enter a valid 10-digit mobile number";
+      }
     }
 
     if (step === 2) {
@@ -442,7 +453,13 @@ export const EnquiryPopup: React.FC<EnquiryPopupProps> = ({ open, onClose, defau
                           <input
                             type="email"
                             value={formData.email}
-                            onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                            onChange={(e) => {
+                              const val = e.target.value;
+                              setFormData({ ...formData, email: val });
+                              if (val.includes("@") && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val.trim())) {
+                                setErrors((prev) => ({ ...prev, email: undefined }));
+                              }
+                            }}
                             placeholder="you@example.com"
                             className="w-full rounded-xs border border-[#F3EFE7]/20 bg-white/5 px-3 py-2 text-xs text-[#F3EFE7] outline-none transition-colors focus:border-[#DE1D25]"
                           />
@@ -451,13 +468,21 @@ export const EnquiryPopup: React.FC<EnquiryPopupProps> = ({ open, onClose, defau
 
                         <div>
                           <label className="block text-[10px] uppercase tracking-[0.18em] font-medium text-[#F3EFE7]/80 mb-1">
-                            PHONE / WHATSAPP *
+                            PHONE / WHATSAPP (10 DIGITS) *
                           </label>
                           <input
                             type="tel"
+                            inputMode="numeric"
+                            maxLength={10}
                             value={formData.phone}
-                            onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                            placeholder="087669 26173"
+                            onChange={(e) => {
+                              const clean = e.target.value.replace(/\D/g, "").slice(0, 10);
+                              setFormData({ ...formData, phone: clean });
+                              if (clean.length === 10) {
+                                setErrors((prev) => ({ ...prev, phone: undefined }));
+                              }
+                            }}
+                            placeholder="e.g. 9876543210"
                             className="w-full rounded-xs border border-[#F3EFE7]/20 bg-white/5 px-3 py-2 text-xs text-[#F3EFE7] outline-none transition-colors focus:border-[#DE1D25]"
                           />
                           {errors.phone && <p className="mt-1 text-[11px] text-[#DE1D25]">{errors.phone}</p>}
@@ -566,36 +591,6 @@ export const EnquiryPopup: React.FC<EnquiryPopupProps> = ({ open, onClose, defau
                           </select>
                         </div>
                       </div>
-
-                      {/* CONDITIONAL SMART FIELDS */}
-                      {formData.propertyType === "Office" && (
-                        <div className="grid grid-cols-2 gap-3 pt-1 border-t border-white/10">
-                          <div>
-                            <label className="block text-[9px] uppercase tracking-[0.18em] text-[#C5B7A7]">
-                              WORKSTATIONS
-                            </label>
-                            <input
-                              type="text"
-                              value={formData.workstations}
-                              onChange={(e) => setFormData({ ...formData, workstations: e.target.value })}
-                              placeholder="e.g. 20"
-                              className="mt-0.5 w-full border border-white/20 bg-white/5 px-2.5 py-1.5 text-xs text-white outline-none"
-                            />
-                          </div>
-                          <div>
-                            <label className="block text-[9px] uppercase tracking-[0.18em] text-[#C5B7A7]">
-                              MEETING ROOMS
-                            </label>
-                            <input
-                              type="text"
-                              value={formData.meetingRooms}
-                              onChange={(e) => setFormData({ ...formData, meetingRooms: e.target.value })}
-                              placeholder="e.g. 2"
-                              className="mt-0.5 w-full border border-white/20 bg-white/5 px-2.5 py-1.5 text-xs text-white outline-none"
-                            />
-                          </div>
-                        </div>
-                      )}
 
                       {formData.propertyType === "Retail / Commercial" && (
                         <div className="pt-1 border-t border-white/10">

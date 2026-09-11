@@ -1,75 +1,93 @@
-import blackHouse from "@/assets/project-black-house.webp";
-import minimal from "@/assets/project-minimal.webp";
-import villa from "@/assets/project-villa.webp";
-import apartment from "@/assets/project-apartment.webp";
-
 export type Project = {
   slug: string;
   title: string;
+  category: string;
   location: string;
   year: string;
   area: string;
   image: string;
   intro: string;
   rooms: string[];
+  galleryImages: string[];
 };
 
 export const PROJECTS: Project[] = [
   {
-    slug: "the-black-house",
-    title: "The Black House",
+    slug: "the-obsidian-residence",
+    title: "The Obsidian Residence",
+    category: "Bespoke Residential Interior",
     location: "Alibaug, India",
     year: "2025",
     area: "6,400 sq.ft.",
-    image: blackHouse,
+    image: "/Gallary/interior_design_001.jpeg",
     intro:
-      "A monolithic basalt volume carved by warm interior light. Every threshold was designed as a change of temperature rather than a change of room.",
-    rooms: ["Entrance", "Living Room", "Dining", "Kitchen", "Bedroom", "Garden"],
+      "A bespoke residential interior sculpted with rich basalt marble, warm indirect lighting, and artisanal smoked walnut millwork. Every space is tailored for tranquil living and refined luxury.",
+    rooms: ["Entrance Foyer", "Living Lounge", "Dining Atelier", "Modular Kitchen", "Master Suite", "Private Terrace"],
+    galleryImages: [
+      "/Gallary/interior_design_001.jpeg",
+      "/Gallary/interior_design_002.jpeg",
+      "/Gallary/interior_design_003.jpeg",
+      "/Gallary/interior_design_004.jpeg",
+    ],
   },
   {
     slug: "modern-minimal-residence",
     title: "Modern Minimal Residence",
+    category: "Contemporary Interior Design",
     location: "Copenhagen, Denmark",
     year: "2024",
     area: "2,900 sq.ft.",
-    image: minimal,
+    image: "/Gallary/interior_design_005.jpeg",
     intro:
-      "Restraint as luxury. Oak, lime plaster and northern light held in balance across an open plan without a single visible fixing.",
-    rooms: ["Entrance", "Living Room", "Dining", "Kitchen", "Bedroom", "Garden"],
+      "Restraint as luxury. Natural oak joinery, bespoke lime plaster finishes, and curated contemporary furniture held in harmony across an open interior layout.",
+    rooms: ["Formal Living", "Dining Salon", "Chef's Kitchen", "Primary Bedroom", "Guest Suite", "Reading Corner"],
+    galleryImages: [
+      "/Gallary/interior_design_005.jpeg",
+      "/Gallary/interior_design_006.jpeg",
+      "/Gallary/interior_design_007.jpeg",
+      "/Gallary/interior_design_008.jpeg",
+    ],
   },
   {
     slug: "contemporary-villa",
-    title: "Contemporary Villa",
+    title: "Contemporary Villa Sanctuary",
+    category: "Luxury Villa Interior",
     location: "Marbella, Spain",
     year: "2025",
     area: "8,100 sq.ft.",
-    image: villa,
+    image: "/Gallary/interior_design_010.jpeg",
     intro:
-      "Book-matched Calacatta, champagne brass and an internal olive courtyard that turns the circulation into a landscape.",
-    rooms: ["Entrance", "Living Room", "Dining", "Kitchen", "Bedroom", "Garden"],
+      "Book-matched Italian marble, champagne brass detailing, and custom interior styling that transforms every room into a timeless living experience.",
+    rooms: ["Grand Foyer", "Open Living", "Formal Dining", "Island Kitchen", "Master Sanctuary", "Entertainment Lounge"],
+    galleryImages: [
+      "/Gallary/interior_design_009.jpeg",
+      "/Gallary/interior_design_010.jpeg",
+      "/Gallary/interior_design_011.jpeg",
+      "/Gallary/interior_design_012.jpeg",
+    ],
   },
   {
     slug: "luxury-apartment",
-    title: "Luxury Apartment",
+    title: "Skyline Penthouse Residence",
+    category: "Penthouse Interior Design",
     location: "Mumbai, India",
     year: "2024",
     area: "3,250 sq.ft.",
-    image: apartment,
+    image: "/Gallary/interior_design_015.jpeg",
     intro:
-      "A night-facing residence on the 41st floor, tuned entirely around the city skyline and layered pools of low warm light.",
-    rooms: ["Entrance", "Living Room", "Dining", "Kitchen", "Bedroom", "Garden"],
-  },
-  {
-    slug: "boutique-office",
-    title: "Boutique Office",
-    location: "Lisbon, Portugal",
-    year: "2023",
-    area: "4,000 sq.ft.",
-    image: villa,
-    intro:
-      "A working environment with the material calm of a private home: travertine, linen acoustics and daylight as the primary fixture.",
-    rooms: ["Entrance", "Living Room", "Dining", "Kitchen", "Bedroom", "Garden"],
+      "A high-floor penthouse interior tuned around skyline vistas, bespoke Italian furnishings, and layered atmospheric lighting.",
+    rooms: ["Sky Living Room", "Dining Suite", "Gourmet Kitchen", "Master Suite", "Walk-in Wardrobe", "Balcony Lounge"],
+    galleryImages: [
+      "/Gallary/interior_design_013.jpeg",
+      "/Gallary/interior_design_014.jpeg",
+      "/Gallary/interior_design_015.jpeg",
+      "/Gallary/interior_design_016.jpeg",
+    ],
   },
 ];
 
-export const getProject = (slug: string) => PROJECTS.find((p) => p.slug === slug);
+export const getProject = (slug: string) => {
+  // Support legacy slugs for backward compatibility
+  if (slug === "the-black-house") return PROJECTS[0];
+  return PROJECTS.find((p) => p.slug === slug);
+};

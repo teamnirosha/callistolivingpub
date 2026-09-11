@@ -594,7 +594,7 @@ export function Projects() {
 
 export function About() {
   return (
-    <section id="about" className="relative bg-ink py-14 sm:py-20">
+    <section id="about" className="relative bg-ink py-14 sm:py-20 scroll-mt-20">
       <div className="mx-auto grid max-w-[1600px] gap-14 px-6 md:grid-cols-[1fr_1.1fr] md:px-12">
         <Reveal>
           <p className="eyebrow">The Studio</p>
@@ -1032,7 +1032,7 @@ export function Contact({ onEnquire }: { onEnquire?: () => void }) {
   };
 
   return (
-    <section id="contact" className="relative bg-ink pb-12 pt-14 sm:pt-20">
+    <section id="contact" className="relative bg-ink pb-12 pt-14 sm:pt-20 scroll-mt-20">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}

@@ -30,7 +30,7 @@ export const GallerySection: React.FC<GallerySectionProps> = ({ onEnquire, isFul
   }, [isFullPage, selectedCategory]);
 
   return (
-    <section id="gallery" className="relative bg-[#F3EFE7] py-14 sm:py-20 text-[#171817]">
+    <section id="gallery" className="relative bg-[#F3EFE7] py-14 sm:py-20 text-[#171817] scroll-mt-20">
       <div className="mx-auto max-w-[1600px] px-6 lg:px-12">
         {/* SECTION HEADING */}
         <div className="flex flex-col items-center justify-center text-center mb-10 border-b border-[#171817]/15 pb-8">

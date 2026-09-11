@@ -49,6 +49,45 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onEnquire }) => {
   const [activeOptionIndex, setActiveOptionIndex] = useState(0);
   const rootRef = useRef<HTMLDivElement>(null);
 
+  // Smooth entrance animation on page load with clearProps
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      const tl = gsap.timeline({ delay: 0.1 });
+
+      tl.fromTo(
+        ".hero-eyebrow",
+        { opacity: 0, y: -15 },
+        { opacity: 1, y: 0, duration: 0.7, ease: "power3.out", clearProps: "all" }
+      )
+      .fromTo(
+        ".hero-headline-line",
+        { opacity: 0, y: 40 },
+        { opacity: 1, y: 0, duration: 0.85, stagger: 0.12, ease: "power4.out", clearProps: "all" },
+        "-=0.3"
+      )
+      .fromTo(
+        ".hero-description",
+        { opacity: 0, y: 15 },
+        { opacity: 1, y: 0, duration: 0.75, ease: "power3.out", clearProps: "all" },
+        "-=0.4"
+      )
+      .fromTo(
+        ".hero-cta-btn",
+        { opacity: 0, y: 15 },
+        { opacity: 1, y: 0, duration: 0.7, stagger: 0.1, ease: "power3.out", clearProps: "all" },
+        "-=0.4"
+      )
+      .fromTo(
+        ".hero-footer-bar",
+        { opacity: 0, y: 10 },
+        { opacity: 1, y: 0, duration: 0.6, ease: "power2.out", clearProps: "all" },
+        "-=0.3"
+      );
+    }, rootRef);
+
+    return () => ctx.revert();
+  }, []);
+
   // Automatic slideshow transition
   useEffect(() => {
     const timer = setInterval(() => {
@@ -64,7 +103,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onEnquire }) => {
   return (
     <section
       ref={rootRef}
-      className="relative h-screen w-full bg-[#171817] text-[#F3EFE7] overflow-hidden flex flex-col justify-between pt-24 pb-8"
+      className="relative min-h-[100svh] w-full bg-[#171817] text-[#F3EFE7] overflow-hidden flex flex-col justify-between pt-20 sm:pt-24 pb-6 sm:pb-8"
     >
       {/* BACKGROUND IMAGE CAROUSEL WITH DYNAMIC CROSSFADE */}
       <div className="absolute inset-0 z-0 overflow-hidden">
@@ -88,22 +127,28 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onEnquire }) => {
       </div>
 
       {/* MAIN CONTENT BINDING */}
-      <div className="relative z-20 mx-auto my-auto w-full max-w-[1600px] px-6 lg:px-12">
+      <div className="relative z-30 mx-auto my-auto w-full max-w-[1600px] px-6 lg:px-12 py-4">
         <div className="max-w-2xl">
           {/* Eyebrow */}
           <div className="hero-eyebrow mb-2 sm:mb-3 inline-flex items-center gap-2">
-            <span className="h-1.5 w-1.5 rounded-full bg-[#DE1D25]" />
+            <span className="h-2 w-2 rounded-full bg-[#DE1D25] animate-ping" />
             <span className="text-[10px] md:text-[11px] font-semibold uppercase tracking-[0.25em] text-[#F3EFE7]/90">
               PREMIUM INTERIOR DESIGN STUDIO
             </span>
           </div>
 
           {/* Headline */}
-          <h1 className="font-display leading-[0.85] text-3xl sm:text-5xl md:text-7xl lg:text-[6.5rem] tracking-tight text-[#F3EFE7]">
-            <span className="hero-headline-line block">SPACES</span>
-            <span className="hero-headline-line block">THAT</span>
-            <span className="hero-headline-line block font-normal italic text-[#C5B7A7]">
-              DEFINE YOU
+          <h1 className="font-display leading-[0.9] sm:leading-[0.88] text-3xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-[5.5rem] tracking-tight text-[#F3EFE7]">
+            <span className="overflow-hidden block">
+              <span className="hero-headline-line block">SPACES</span>
+            </span>
+            <span className="overflow-hidden block">
+              <span className="hero-headline-line block">THAT</span>
+            </span>
+            <span className="overflow-hidden block">
+              <span className="hero-headline-line block font-normal italic text-[#C5B7A7]">
+                DEFINE YOU
+              </span>
             </span>
           </h1>
 
@@ -112,12 +157,12 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onEnquire }) => {
             We create timeless luxury interiors where spatial design, bespoke craftsmanship, and emotional elegance unite seamlessly.
           </p>
 
-          {/* CTA GROUP */}
-          <div className="mt-5 sm:mt-7 flex flex-wrap items-center gap-3 sm:gap-4 relative z-30 opacity-100">
+          {/* CTA GROUP - GUARANTEED VISIBLE */}
+          <div className="mt-5 sm:mt-6 flex flex-wrap items-center gap-3 sm:gap-4 relative z-40">
             <button
               type="button"
               onClick={onEnquire}
-              className="group inline-flex items-center justify-center gap-2 bg-[#DE1D25] px-6 sm:px-7 py-3 sm:py-3.5 text-xs font-bold uppercase tracking-[0.18em] text-white transition-all duration-300 hover:bg-white hover:text-[#171817] shadow-lg cursor-pointer opacity-100"
+              className="hero-cta-btn group inline-flex items-center justify-center gap-2 bg-[#DE1D25] px-6 sm:px-7 py-3 sm:py-3.5 text-xs font-bold uppercase tracking-[0.18em] text-white transition-all duration-300 hover:bg-white hover:text-[#171817] shadow-xl cursor-pointer"
             >
               <span>TAKE ENQUIRY</span>
               <span className="transition-transform duration-300 group-hover:translate-x-1">→</span>
@@ -125,7 +170,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onEnquire }) => {
 
             <a
               href="#gallery"
-              className="inline-flex items-center justify-center border border-[#F3EFE7]/40 bg-white/5 backdrop-blur-xs px-6 sm:px-7 py-3 sm:py-3.5 text-xs font-bold uppercase tracking-[0.18em] text-[#F3EFE7] transition-all duration-300 hover:border-[#F3EFE7] hover:bg-white/15 cursor-pointer opacity-100"
+              className="hero-cta-btn inline-flex items-center justify-center border border-[#F3EFE7]/50 bg-black/30 backdrop-blur-md px-6 sm:px-7 py-3 sm:py-3.5 text-xs font-bold uppercase tracking-[0.18em] text-[#F3EFE7] transition-all duration-300 hover:border-[#F3EFE7] hover:bg-white/15 cursor-pointer"
             >
               EXPLORE OUR WORK
             </a>
@@ -134,7 +179,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onEnquire }) => {
       </div>
 
       {/* LOWER SCROLL & EDITORIAL SWITCHER */}
-      <div className="relative z-30 mx-auto w-full max-w-[1600px] px-6 lg:px-12 pt-4 flex items-end justify-between pointer-events-auto">
+      <div className="hero-footer-bar relative z-30 mx-auto w-full max-w-[1600px] px-6 lg:px-12 pt-2 sm:pt-4 flex items-end justify-between pointer-events-auto">
         <div className="flex items-center gap-3 text-[#F3EFE7]/70">
           <div className="h-6 sm:h-8 w-[1px] bg-gradient-to-b from-[#F3EFE7] to-transparent animate-pulse" />
           <span className="text-[9px] font-medium uppercase tracking-[0.22em] text-[#F3EFE7]/80">

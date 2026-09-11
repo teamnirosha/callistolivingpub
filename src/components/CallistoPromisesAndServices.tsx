@@ -451,7 +451,7 @@ export const CallistoPromisesAndServices: React.FC<CallistoPromisesProps> = ({ o
       {/* ========================================================================= */}
       {/* SECTION 3: END-TO-END HOME INTERIOR SERVICES (100% RELIABLE ICON RENDER) */}
       {/* ========================================================================= */}
-      <section className="relative py-16 md:py-24 bg-[#F3EFE7] border-b border-[#171817]/15">
+      <section id="services" className="relative py-16 md:py-24 bg-[#F3EFE7] border-b border-[#171817]/15 scroll-mt-20">
         <div className="mx-auto w-full max-w-[1600px] px-6 lg:px-12">
           {/* Header */}
           <div className="text-center max-w-3xl mx-auto mb-16 sm:mb-20">

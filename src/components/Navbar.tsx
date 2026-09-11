@@ -45,12 +45,20 @@ export function Navbar({ onEnquire }: NavbarProps) {
     const currentPath = typeof window !== "undefined" ? window.location.pathname : "/";
 
     if (hash) {
-      const el = document.getElementById(hash);
-      if (el && currentPath === "/") {
-        e.preventDefault();
-        el.scrollIntoView({ behavior: "smooth", block: "start" });
-        return;
+      if (currentPath === "/") {
+        const el = document.getElementById(hash);
+        if (el) {
+          e.preventDefault();
+          window.history.pushState(null, "", `/#${hash}`);
+          el.scrollIntoView({ behavior: "smooth", block: "start" });
+          return;
+        }
       }
+    } else if (to === "/" && currentPath === "/") {
+      e.preventDefault();
+      window.history.pushState(null, "", "/");
+      window.scrollTo({ top: 0, behavior: "smooth" });
+      return;
     }
   };
 
