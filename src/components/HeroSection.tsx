@@ -102,8 +102,9 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onEnquire }) => {
 
   return (
     <section
+      id="home"
       ref={rootRef}
-      className="relative min-h-[100svh] w-full bg-[#171817] text-[#F3EFE7] overflow-hidden flex flex-col justify-between pt-20 sm:pt-24 pb-6 sm:pb-8"
+      className="relative min-h-[100svh] w-full bg-[#171817] text-[#F3EFE7] overflow-hidden flex flex-col justify-between pt-20 sm:pt-24 pb-6 sm:pb-8 scroll-mt-20"
     >
       {/* BACKGROUND IMAGE CAROUSEL WITH DYNAMIC CROSSFADE */}
       <div className="absolute inset-0 z-0 overflow-hidden">

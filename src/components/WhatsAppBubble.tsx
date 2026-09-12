@@ -7,12 +7,14 @@ interface WhatsAppBubbleProps {
 }
 
 export const WhatsAppBubble: React.FC<WhatsAppBubbleProps> = ({
-  phoneNumber = "919876543210",
-  message = "Hello Callisto Living! I'm interested in your interior design services.",
+  phoneNumber = "918766926173",
+  message = "Hello Callisto Living! I'm interested in your luxury interior design services.",
 }) => {
   const [showTooltip, setShowTooltip] = useState(true);
 
-  const whatsappUrl = `https://api.whatsapp.com/send?phone=${phoneNumber}&text=${encodeURIComponent(
+  // Clean phone number to remove any +, spaces, or dashes
+  const cleanNumber = phoneNumber.replace(/\D/g, "");
+  const whatsappUrl = `https://api.whatsapp.com/send?phone=${cleanNumber}&text=${encodeURIComponent(
     message
   )}`;
 

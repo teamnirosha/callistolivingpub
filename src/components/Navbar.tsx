@@ -3,12 +3,12 @@ import React, { useEffect, useState } from "react";
 import { CallistoLogo } from "./CallistoLogo";
 
 const LINKS = [
-  { label: "HOME", to: "/" },
-  { label: "ABOUT", to: "/", hash: "about" },
-  { label: "SERVICES", to: "/", hash: "services" },
-  { label: "PROJECTS", to: "/", hash: "projects" },
-  { label: "GALLERY", to: "/", hash: "gallery" },
-  { label: "CONTACT", to: "/", hash: "contact" },
+  { id: "home", label: "HOME", to: "/", hash: "" },
+  { id: "about", label: "ABOUT", to: "/", hash: "about" },
+  { id: "services", label: "SERVICES", to: "/", hash: "services" },
+  { id: "projects", label: "PROJECTS", to: "/", hash: "projects" },
+  { id: "gallery", label: "GALLERY", to: "/", hash: "gallery" },
+  { id: "contact", label: "CONTACT", to: "/", hash: "contact" },
 ];
 
 interface NavbarProps {
@@ -18,6 +18,7 @@ interface NavbarProps {
 export function Navbar({ onEnquire }: NavbarProps) {
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [activeId, setActiveId] = useState<string>("home");
 
   useEffect(() => {
     const handleScroll = () => {
@@ -26,6 +27,70 @@ export function Navbar({ onEnquire }: NavbarProps) {
     handleScroll();
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  // Detect active section via pathname, hash, and scrollspy
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+
+    const determineActive = () => {
+      const pathname = window.location.pathname;
+      const hash = window.location.hash.replace("#", "");
+
+      if (pathname === "/gallery" || pathname === "/Gallary") {
+        setActiveId("gallery");
+        return;
+      }
+
+      if (pathname.startsWith("/projects/")) {
+        setActiveId("projects");
+        return;
+      }
+
+      if (pathname === "/" || pathname === "") {
+        const scrollY = window.scrollY;
+
+        // Top of page
+        if (scrollY < 180 && !hash) {
+          setActiveId("home");
+          return;
+        }
+
+        // Ordered from bottom of page upwards so closest active section wins
+        const sectionOrder = ["contact", "about", "services", "gallery", "projects", "home"];
+        const navOffset = 100;
+        const triggerPoint = scrollY + navOffset + 80;
+
+        for (const secId of sectionOrder) {
+          const el = document.getElementById(secId);
+          if (el) {
+            const top = el.offsetTop;
+            const height = el.offsetHeight;
+            if (triggerPoint >= top && triggerPoint < top + height) {
+              setActiveId(secId);
+              return;
+            }
+          }
+        }
+
+        if (hash && ["about", "services", "projects", "gallery", "contact", "home"].includes(hash)) {
+          setActiveId(hash);
+        } else if (scrollY < 300) {
+          setActiveId("home");
+        }
+      }
+    };
+
+    determineActive();
+    window.addEventListener("scroll", determineActive, { passive: true });
+    window.addEventListener("hashchange", determineActive);
+    window.addEventListener("popstate", determineActive);
+
+    return () => {
+      window.removeEventListener("scroll", determineActive);
+      window.removeEventListener("hashchange", determineActive);
+      window.removeEventListener("popstate", determineActive);
+    };
   }, []);
 
   // Lock body scroll when mobile menu is open
@@ -40,8 +105,11 @@ export function Navbar({ onEnquire }: NavbarProps) {
     };
   }, [mobileMenuOpen]);
 
-  const handleNavClick = (e: React.MouseEvent, to: string = "/", hash?: string) => {
+  const handleNavClick = (e: React.MouseEvent, to: string = "/", hash?: string, linkId?: string) => {
     setMobileMenuOpen(false);
+    const targetId = linkId || (hash ? hash : "home");
+    setActiveId(targetId);
+
     const currentPath = typeof window !== "undefined" ? window.location.pathname : "/";
 
     if (hash) {
@@ -58,6 +126,7 @@ export function Navbar({ onEnquire }: NavbarProps) {
       e.preventDefault();
       window.history.pushState(null, "", "/");
       window.scrollTo({ top: 0, behavior: "smooth" });
+      setActiveId("home");
       return;
     }
   };
@@ -72,7 +141,7 @@ export function Navbar({ onEnquire }: NavbarProps) {
         {/* LEFT: Official Callisto Living Logo */}
         <Link
           to="/"
-          onClick={(e) => handleNavClick(e, "/", undefined)}
+          onClick={(e) => handleNavClick(e, "/", undefined, "home")}
           className="group flex items-center transition-opacity hover:opacity-90"
         >
           <CallistoLogo
@@ -82,21 +151,37 @@ export function Navbar({ onEnquire }: NavbarProps) {
           />
         </Link>
 
-        {/* CENTER: Navigation Links */}
+        {/* CENTER: Navigation Links with Active Indicators */}
         <div className="hidden items-center gap-7 lg:flex">
-          {LINKS.map((link) => (
-            <Link
-              key={link.label}
-              to={link.to}
-              {...(link.hash ? { hash: link.hash } : {})}
-              onClick={(e) => handleNavClick(e, link.to, link.hash)}
-              className="relative py-1 text-[11px] uppercase tracking-[0.2em] font-semibold transition-colors duration-300 group text-[#171817]/80 hover:text-[#DE1D25]"
-            >
-              {link.label}
-              {/* Red Hover Underline */}
-              <span className="absolute bottom-0 left-0 h-[1.5px] w-0 bg-[#DE1D25] transition-all duration-300 group-hover:w-full" />
-            </Link>
-          ))}
+          {LINKS.map((link) => {
+            const isActive = activeId === link.id;
+            return (
+              <Link
+                key={link.id}
+                to={link.to}
+                {...(link.hash ? { hash: link.hash } : {})}
+                onClick={(e) => handleNavClick(e, link.to, link.hash, link.id)}
+                className={`relative py-2 text-[11px] uppercase tracking-[0.2em] transition-all duration-300 group flex items-center gap-1.5 cursor-pointer ${
+                  isActive
+                    ? "text-[#DE1D25] font-bold"
+                    : "text-[#171817]/75 font-semibold hover:text-[#DE1D25]"
+                }`}
+                aria-current={isActive ? "page" : undefined}
+              >
+                {/* Active Indicator Pulse Dot */}
+                {isActive && (
+                  <span className="h-1.5 w-1.5 rounded-full bg-[#DE1D25] animate-pulse shrink-0" />
+                )}
+                <span>{link.label}</span>
+                {/* Red Underline Indicator (Solid when active, expands on hover) */}
+                <span
+                  className={`absolute bottom-0 left-0 h-[2px] bg-[#DE1D25] transition-all duration-300 ${
+                    isActive ? "w-full" : "w-0 group-hover:w-full"
+                  }`}
+                />
+              </Link>
+            );
+          })}
         </div>
 
         {/* RIGHT: ENQUIRE NOW → Button */}
@@ -150,24 +235,38 @@ export function Navbar({ onEnquire }: NavbarProps) {
             <button
               type="button"
               onClick={() => setMobileMenuOpen(false)}
-              className="text-xs uppercase tracking-[0.2em] font-semibold text-[#DE1D25] cursor-pointer"
+              className="text-xs uppercase tracking-[0.2em] font-semibold text-[#DE1D25] cursor-pointer px-2 py-1 rounded-xs border border-[#DE1D25]/30 hover:bg-[#DE1D25]/10"
             >
               CLOSE ✕
             </button>
           </div>
 
-          <div className="flex flex-col gap-6 py-8">
-            {LINKS.map((link) => (
-              <Link
-                key={link.label}
-                to={link.to}
-                {...(link.hash ? { hash: link.hash } : {})}
-                onClick={(e) => handleNavClick(e, link.to, link.hash)}
-                className="font-display text-3xl sm:text-4xl tracking-wide text-[#F3EFE7] transition-colors hover:text-[#DE1D25]"
-              >
-                {link.label}
-              </Link>
-            ))}
+          <div className="flex flex-col gap-5 py-6">
+            {LINKS.map((link) => {
+              const isActive = activeId === link.id;
+              return (
+                <Link
+                  key={link.id}
+                  to={link.to}
+                  {...(link.hash ? { hash: link.hash } : {})}
+                  onClick={(e) => handleNavClick(e, link.to, link.hash, link.id)}
+                  className={`flex items-center justify-between font-display text-2xl sm:text-3xl tracking-wide transition-all duration-300 py-2.5 border-b border-[#F3EFE7]/10 ${
+                    isActive
+                      ? "text-[#DE1D25] font-bold border-l-4 border-l-[#DE1D25] pl-4 bg-white/5"
+                      : "text-[#F3EFE7]/80 hover:text-[#DE1D25] pl-2"
+                  }`}
+                >
+                  <span>{link.label}</span>
+                  {isActive ? (
+                    <span className="text-[10px] tracking-[0.2em] font-sans uppercase font-bold text-white bg-[#DE1D25] px-2.5 py-0.5 rounded-xs">
+                      ACTIVE
+                    </span>
+                  ) : (
+                    <span className="text-xs text-[#F3EFE7]/30">→</span>
+                  )}
+                </Link>
+              );
+            })}
           </div>
 
           <div className="border-t border-[#F3EFE7]/15 pt-6">
@@ -185,7 +284,7 @@ export function Navbar({ onEnquire }: NavbarProps) {
                   setMobileMenuOpen(false);
                   onEnquire();
                 }}
-                className="mt-5 flex w-full items-center justify-center gap-2 bg-[#DE1D25] py-3.5 text-xs font-semibold uppercase tracking-[0.2em] text-white transition-colors hover:bg-white hover:text-[#171817] cursor-pointer"
+                className="mt-5 flex w-full items-center justify-center gap-2 bg-[#DE1D25] py-3.5 text-xs font-semibold uppercase tracking-[0.2em] text-white transition-colors hover:bg-white hover:text-[#171817] cursor-pointer shadow-lg"
               >
                 <span>ENQUIRE NOW</span>
                 <span>→</span>

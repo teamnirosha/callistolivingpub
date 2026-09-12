@@ -1080,6 +1080,17 @@ export function Contact({ onEnquire }: { onEnquire?: () => void }) {
                 +91 87669 26173
               </a>
             </p>
+            <p className="mt-2 text-xs">
+              <a
+                href="https://api.whatsapp.com/send?phone=918766926173&text=Hello%20Callisto%20Living!%20I%20would%20like%20to%20inquire%20about%20interior%20design%20services."
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1.5 text-[#25D366] hover:text-white transition-colors"
+              >
+                <span>Chat on WhatsApp</span>
+                <span>→</span>
+              </a>
+            </p>
           </div>
           <div>
             <p className="eyebrow">Consultation</p>
