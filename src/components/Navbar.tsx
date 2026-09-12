@@ -29,10 +29,11 @@ export function Navbar({ onEnquire }: NavbarProps) {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Detect active section via pathname, hash, and scrollspy
+  // Throttled scroll spy to prevent layout thrashing and keep 120fps hover responsiveness
   useEffect(() => {
     if (typeof window === "undefined") return;
 
+    let rafId = 0;
     const determineActive = () => {
       const pathname = window.location.pathname;
       const hash = window.location.hash.replace("#", "");
@@ -51,14 +52,13 @@ export function Navbar({ onEnquire }: NavbarProps) {
         const scrollY = window.scrollY;
 
         // Top of page
-        if (scrollY < 180 && !hash) {
+        if (scrollY < 120 && !hash) {
           setActiveId("home");
           return;
         }
 
-        // Ordered from bottom of page upwards so closest active section wins
         const sectionOrder = ["contact", "about", "services", "gallery", "projects", "home"];
-        const navOffset = 100;
+        const navOffset = 90;
         const triggerPoint = scrollY + navOffset + 80;
 
         for (const secId of sectionOrder) {
@@ -75,19 +75,25 @@ export function Navbar({ onEnquire }: NavbarProps) {
 
         if (hash && ["about", "services", "projects", "gallery", "contact", "home"].includes(hash)) {
           setActiveId(hash);
-        } else if (scrollY < 300) {
+        } else if (scrollY < 250) {
           setActiveId("home");
         }
       }
     };
 
+    const throttledScroll = () => {
+      cancelAnimationFrame(rafId);
+      rafId = requestAnimationFrame(determineActive);
+    };
+
     determineActive();
-    window.addEventListener("scroll", determineActive, { passive: true });
-    window.addEventListener("hashchange", determineActive);
-    window.addEventListener("popstate", determineActive);
+    window.addEventListener("scroll", throttledScroll, { passive: true });
+    window.addEventListener("hashchange", determineActive, { passive: true });
+    window.addEventListener("popstate", determineActive, { passive: true });
 
     return () => {
-      window.removeEventListener("scroll", determineActive);
+      cancelAnimationFrame(rafId);
+      window.removeEventListener("scroll", throttledScroll);
       window.removeEventListener("hashchange", determineActive);
       window.removeEventListener("popstate", determineActive);
     };
@@ -118,7 +124,13 @@ export function Navbar({ onEnquire }: NavbarProps) {
         if (el) {
           e.preventDefault();
           window.history.pushState(null, "", `/#${hash}`);
-          el.scrollIntoView({ behavior: "smooth", block: "start" });
+          const navHeight = 72;
+          const elementPosition = el.getBoundingClientRect().top + window.scrollY;
+          const offsetPosition = elementPosition - navHeight;
+          window.scrollTo({
+            top: offsetPosition,
+            behavior: "smooth"
+          });
           return;
         }
       }
@@ -133,7 +145,7 @@ export function Navbar({ onEnquire }: NavbarProps) {
 
   return (
     <header
-      className={`fixed inset-x-0 top-0 z-[100] transition-all duration-500 bg-[#F3EFE7]/95 backdrop-blur-md border-b border-[#171817]/10 text-[#171817] ${
+      className={`fixed inset-x-0 top-0 z-[100] transition-[padding,background-color,box-shadow] duration-300 bg-[#F3EFE7]/95 backdrop-blur-md border-b border-[#171817]/10 text-[#171817] ${
         scrolled ? "py-3 shadow-md" : "py-4 shadow-xs"
       }`}
     >
@@ -142,7 +154,7 @@ export function Navbar({ onEnquire }: NavbarProps) {
         <Link
           to="/"
           onClick={(e) => handleNavClick(e, "/", undefined, "home")}
-          className="group flex items-center transition-opacity hover:opacity-90"
+          className="group flex items-center transition-opacity hover:opacity-90 cursor-pointer"
         >
           <CallistoLogo
             variant="dark"
@@ -151,8 +163,8 @@ export function Navbar({ onEnquire }: NavbarProps) {
           />
         </Link>
 
-        {/* CENTER: Navigation Links with Active Indicators */}
-        <div className="hidden items-center gap-7 lg:flex">
+        {/* CENTER: Navigation Links (Clean, No Dots, Smooth Luxury Underline) */}
+        <div className="hidden items-center gap-8 lg:flex">
           {LINKS.map((link) => {
             const isActive = activeId === link.id;
             return (
@@ -161,22 +173,19 @@ export function Navbar({ onEnquire }: NavbarProps) {
                 to={link.to}
                 {...(link.hash ? { hash: link.hash } : {})}
                 onClick={(e) => handleNavClick(e, link.to, link.hash, link.id)}
-                className={`relative py-2 text-[11px] uppercase tracking-[0.2em] transition-all duration-300 group flex items-center gap-1.5 cursor-pointer ${
+                className={`relative py-2 text-[11px] uppercase tracking-[0.2em] font-semibold transition-colors duration-200 group inline-flex items-center cursor-pointer select-none ${
                   isActive
-                    ? "text-[#DE1D25] font-bold"
-                    : "text-[#171817]/75 font-semibold hover:text-[#DE1D25]"
+                    ? "text-[#DE1D25]"
+                    : "text-[#171817]/75 hover:text-[#DE1D25]"
                 }`}
                 aria-current={isActive ? "page" : undefined}
               >
-                {/* Active Indicator Pulse Dot */}
-                {isActive && (
-                  <span className="h-1.5 w-1.5 rounded-full bg-[#DE1D25] animate-pulse shrink-0" />
-                )}
                 <span>{link.label}</span>
-                {/* Red Underline Indicator (Solid when active, expands on hover) */}
+
+                {/* Sleek Minimalist Red Underline Indicator (Solid when active, smoothly expands on hover) */}
                 <span
-                  className={`absolute bottom-0 left-0 h-[2px] bg-[#DE1D25] transition-all duration-300 ${
-                    isActive ? "w-full" : "w-0 group-hover:w-full"
+                  className={`absolute bottom-0 left-0 h-[2px] bg-[#DE1D25] transition-[width,opacity] duration-250 ease-out pointer-events-none ${
+                    isActive ? "w-full opacity-100" : "w-0 opacity-0 group-hover:w-full group-hover:opacity-100"
                   }`}
                 />
               </Link>
