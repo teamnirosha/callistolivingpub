@@ -4,6 +4,9 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import warmDaylight from "@/assets/hero-warm-daylight.jpg";
 import darkCinematic from "@/assets/hero-dark-cinematic.jpg";
 import beigeContemporary from "@/assets/hero-beige-contemporary.jpg";
+import warmDaylightMobile from "@/assets/hero-warm-daylight-mobile.jpg";
+import darkCinematicMobile from "@/assets/hero-dark-cinematic-mobile.jpg";
+import beigeContemporaryMobile from "@/assets/hero-beige-contemporary-mobile.jpg";
 
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
@@ -15,6 +18,8 @@ export interface HeroOption {
   name: string;
   subtitle: string;
   image: string;
+  mobileImage?: string;
+  position?: string;
 }
 
 export const HERO_OPTIONS: HeroOption[] = [
@@ -22,22 +27,25 @@ export const HERO_OPTIONS: HeroOption[] = [
     id: "warm-daylight",
     number: "01",
     name: "WARM DAYLIGHT",
-    subtitle: "Warm daylight luxury living residence",
+    subtitle: "Warm daylight luxury kitchen & residence",
     image: warmDaylight,
+    mobileImage: warmDaylightMobile,
   },
   {
     id: "dark-cinematic",
     number: "02",
     name: "DARK CINEMATIC",
-    subtitle: "Sophisticated dark luxury interior",
+    subtitle: "Sage modern luxury modular kitchen",
     image: darkCinematic,
+    mobileImage: darkCinematicMobile,
   },
   {
     id: "beige-contemporary",
     number: "03",
     name: "CONTEMPORARY BEIGE",
-    subtitle: "Minimal contemporary travertine space",
+    subtitle: "Minimal contemporary wardrobe & vanity suite",
     image: beigeContemporary,
+    mobileImage: beigeContemporaryMobile,
   },
 ];
 
@@ -115,14 +123,25 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onEnquire }) => {
               idx === activeOptionIndex ? "opacity-100 z-10" : "opacity-0 z-0"
             }`}
           >
-            <img
-              src={opt.image}
-              alt={opt.name}
-              className="h-full w-full object-cover transform scale-105 transition-transform duration-10000 ease-out"
-            />
-            {/* Cinematic Gradient Overlays */}
-            <div className="absolute inset-0 bg-gradient-to-t from-[#171817] via-[#171817]/60 to-[#171817]/40" />
-            <div className="absolute inset-0 bg-black/30" />
+            <picture className="absolute inset-0 h-full w-full">
+              {opt.mobileImage && (
+                <source media="(max-width: 639px)" srcSet={opt.mobileImage} />
+              )}
+              <img
+                src={opt.image}
+                alt={opt.name}
+                className="h-full w-full object-cover object-center transition-opacity duration-1000 ease-out"
+              />
+            </picture>
+            {/* Base subtle dark veil */}
+            <div className="absolute inset-0 bg-black/25" />
+
+            {/* Laptop/Desktop lighting: Elegant left vignette for text legibility, keeping right-side interior design vibrant */}
+            <div className="hidden sm:block absolute inset-0 bg-gradient-to-r from-[#171817]/85 via-[#171817]/45 to-transparent" />
+            <div className="hidden sm:block absolute inset-0 bg-gradient-to-t from-[#171817] via-[#171817]/30 to-transparent" />
+
+            {/* Mobile lighting: Smooth vertical gradient for crisp text contrast */}
+            <div className="sm:hidden absolute inset-0 bg-gradient-to-t from-[#171817]/90 via-[#171817]/40 to-[#171817]/20" />
           </div>
         ))}
       </div>
@@ -180,7 +199,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onEnquire }) => {
       </div>
 
       {/* LOWER SCROLL & EDITORIAL SWITCHER */}
-      <div className="hero-footer-bar relative z-30 mx-auto w-full max-w-[1600px] px-6 lg:px-12 pt-2 sm:pt-4 flex items-end justify-between pointer-events-auto">
+      <div className="hero-footer-bar relative z-30 mx-auto w-full max-w-[1600px] px-6 lg:px-12 pt-2 sm:pt-4 flex items-end justify-between pointer-events-auto pr-16 sm:pr-12">
         <div className="flex items-center gap-3 text-[#F3EFE7]/70">
           <div className="h-6 sm:h-8 w-[1px] bg-gradient-to-b from-[#F3EFE7] to-transparent animate-pulse" />
           <span className="text-[9px] font-medium uppercase tracking-[0.22em] text-[#F3EFE7]/80">
@@ -188,7 +207,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onEnquire }) => {
           </span>
         </div>
 
-        <div className="flex items-center gap-1.5 rounded-xs border border-white/15 bg-black/40 p-1 backdrop-blur-md">
+        <div className="flex items-center gap-1.5 rounded-xs border border-white/15 bg-black/40 p-1 backdrop-blur-md mr-14 sm:mr-0">
           {HERO_OPTIONS.map((opt, idx) => {
             const isActive = idx === activeOptionIndex;
             return (
