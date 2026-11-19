@@ -614,9 +614,9 @@ export function About() {
           </p>
           <div className="mt-12 grid grid-cols-3 gap-6 border-t border-sand/10 pt-8">
             {[
-              ["14", "Years"],
-              ["68", "Residences"],
-              ["9", "Awards"],
+              ["3", "Years"],
+              ["40", "Residences"],
+              ["2", "Awards"],
             ].map(([n, l]) => (
               <div key={l}>
                 <p className="font-display text-5xl text-gold">{n}</p>
