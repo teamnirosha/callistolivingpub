@@ -145,29 +145,35 @@ export function GalleryLightbox({
         <button
           type="button"
           onClick={handlePrev}
-          className="absolute left-4 z-30 grid h-12 w-12 place-items-center rounded-full border border-white/20 bg-black/60 text-white transition-all hover:border-white hover:bg-white hover:text-black cursor-pointer shadow-lg"
+          className="absolute left-2 sm:left-4 z-30 grid h-10 w-10 sm:h-12 sm:w-12 place-items-center rounded-full border border-white/20 bg-black/60 text-white transition-all hover:border-white hover:bg-white hover:text-black cursor-pointer shadow-lg"
           aria-label="Previous Image"
         >
-          <ChevronLeft size={24} />
+          <ChevronLeft className="w-5 h-5 sm:w-6 sm:h-6" />
         </button>
 
         {/* IMAGE DISPLAY */}
         <div className="relative max-h-[75vh] max-w-5xl overflow-hidden rounded-xs shadow-[0_0_80px_rgba(0,0,0,0.9)]">
-          <img
-            src={item.image}
-            alt={item.title}
-            className="max-h-[75vh] w-auto max-w-full object-contain transition-all duration-500"
-          />
+          <picture className="contents">
+            <source srcSet={item.image.replace(/\.jpeg$/i, ".avif")} type="image/avif" />
+            <source srcSet={item.image.replace(/\.jpeg$/i, ".webp")} type="image/webp" />
+            <img
+              src={item.image}
+              alt={item.alt || item.title}
+              width={item.width}
+              height={item.height}
+              className="max-h-[75vh] w-auto max-w-full object-contain transition-all duration-500"
+            />
+          </picture>
         </div>
 
         {/* NEXT BUTTON */}
         <button
           type="button"
           onClick={handleNext}
-          className="absolute right-4 z-30 grid h-12 w-12 place-items-center rounded-full border border-white/20 bg-black/60 text-white transition-all hover:border-white hover:bg-white hover:text-black cursor-pointer shadow-lg"
+          className="absolute right-2 sm:right-4 z-30 grid h-10 w-10 sm:h-12 sm:w-12 place-items-center rounded-full border border-white/20 bg-black/60 text-white transition-all hover:border-white hover:bg-white hover:text-black cursor-pointer shadow-lg"
           aria-label="Next Image"
         >
-          <ChevronRight size={24} />
+          <ChevronRight className="w-5 h-5 sm:w-6 sm:h-6" />
         </button>
       </div>
 

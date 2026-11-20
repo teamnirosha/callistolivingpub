@@ -39,20 +39,26 @@ export const ProjectShowcase: React.FC = () => {
                   to="/projects/$slug"
                   params={{ slug: project.slug }}
                   className="relative block w-full overflow-hidden bg-[#222] rounded-xs"
+                  tabIndex={-1}
+                  aria-hidden="true"
                 >
                   <div
                     className={`relative w-full overflow-hidden ${
                       isFeatured
-                        ? "aspect-[16/7.2] max-h-[440px] md:max-h-[500px]"
-                        : "aspect-[16/8.5] max-h-[380px]"
+                        ? "aspect-[16/10] sm:aspect-[16/9] max-h-[540px] md:max-h-[620px]"
+                        : "aspect-[16/10] sm:aspect-[16/9.5] max-h-[480px] md:max-h-[540px]"
                     }`}
                   >
-                    <img
-                      src={project.image}
-                      alt={project.title}
-                      className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-1.04"
-                      loading={idx === 0 ? "eager" : "lazy"}
-                    />
+                    <picture className="block h-full w-full">
+                      <source srcSet={project.image.replace(/\.jpeg$/i, ".avif")} type="image/avif" />
+                      <source srcSet={project.image.replace(/\.jpeg$/i, ".webp")} type="image/webp" />
+                      <img
+                        src={project.image}
+                        alt={project.title}
+                        className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-1.04"
+                        loading={idx === 0 ? "eager" : "lazy"}
+                      />
+                    </picture>
                     {/* Subtle Hover Gradient */}
                     <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
                   </div>
@@ -84,6 +90,8 @@ export const ProjectShowcase: React.FC = () => {
                       to="/projects/$slug"
                       params={{ slug: project.slug }}
                       className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.2em] text-[#F3EFE7] transition-all duration-300 group-hover:text-[#DE1D25] group-hover:translate-x-1"
+                      tabIndex={-1}
+                      aria-hidden="true"
                     >
                       <span>VIEW PROJECT</span>
                       <span>→</span>

@@ -8,6 +8,7 @@ import blackHouse from "@/assets/project-black-house.webp";
 import minimal from "@/assets/project-minimal.webp";
 import villa from "@/assets/project-villa.webp";
 import { PROJECTS } from "@/lib/projects";
+import { getPublishedLocations } from "@/lib/locations";
 import { setState } from "@/lib/store";
 import { MaterialExplorer } from "./SceneControls";
 import { CallistoLogo } from "./CallistoLogo";
@@ -498,7 +499,7 @@ export function Services() {
         </Reveal>
         <div className="mt-16 grid gap-px bg-sand/10 md:grid-cols-2">
           {SERVICES.map(([title, body], i) => (
-            <Reveal key={title} className="bg-ink p-10">
+            <Reveal key={title} className="bg-ink p-6 sm:p-8 md:p-10">
               <p className="eyebrow">{`0${i + 1}`}</p>
               <h3 className="mt-4 font-display text-3xl text-sand">{title}</h3>
               <p className="mt-4 max-w-sm text-sm leading-relaxed text-sand/60">{body}</p>
@@ -553,14 +554,18 @@ function ProjectCard({ project, index }: { project: (typeof PROJECTS)[number]; i
         className="group block will-change-transform"
       >
         <div className="relative overflow-hidden bg-ink">
-          <img
-            src={project.image}
-            alt={`${project.title} | Interior design by Callisto Living`}
-            loading="lazy"
-            width={1200}
-            height={1500}
-            className="h-[62vh] w-full object-cover opacity-90 transition-opacity duration-700 group-hover:opacity-100"
-          />
+          <picture className="block w-full">
+            <source srcSet={project.image.replace(/\.jpeg$/i, ".avif")} type="image/avif" />
+            <source srcSet={project.image.replace(/\.jpeg$/i, ".webp")} type="image/webp" />
+            <img
+              src={project.image}
+              alt={`${project.title} | Interior design by Callisto Living`}
+              loading="lazy"
+              width={1200}
+              height={1500}
+              className="h-[62vh] w-full object-cover opacity-90 transition-opacity duration-700 group-hover:opacity-100"
+            />
+          </picture>
           <div className="absolute inset-0 bg-gradient-to-t from-ink/85 via-transparent to-transparent" />
           <div className="card-title absolute bottom-6 left-6 right-6">
             <p className="eyebrow">{`${project.location} | ${project.year}`}</p>
@@ -612,15 +617,15 @@ export function About() {
             workplaces across three continents. Each project is led end to end by one designer, with
             an in-house team of makers in stone, brass and cabinetry.
           </p>
-          <div className="mt-12 grid grid-cols-3 gap-6 border-t border-sand/10 pt-8">
+          <div className="mt-12 grid grid-cols-3 gap-3 sm:gap-6 border-t border-sand/10 pt-8 text-center sm:text-left">
             {[
               ["3", "Years"],
               ["40", "Residences"],
               ["2", "Awards"],
             ].map(([n, l]) => (
-              <div key={l}>
-                <p className="font-display text-5xl text-gold">{n}</p>
-                <p className="eyebrow mt-2">{l}</p>
+              <div key={l} className="flex flex-col items-center sm:items-start">
+                <p className="font-display text-4xl sm:text-5xl text-gold leading-none">{n}</p>
+                <p className="eyebrow mt-2 text-[10px] sm:text-xs tracking-[0.14em] sm:tracking-[0.18em]">{l}</p>
               </div>
             ))}
           </div>
@@ -1014,29 +1019,59 @@ export function FAQ() {
   );
 }
 
-export function Contact({ onEnquire }: { onEnquire?: () => void }) {
-  const jsonLd = {
-    "@context": "https://schema.org",
-    "@type": "InteriorDesignStudio",
-    "name": "Callisto Living",
-    "telephone": "+91 87669 26173",
-    "email": "info@callistoliving.in",
-    "address": {
-      "@type": "PostalAddress",
-      "streetAddress": "FG 1002, Silver Stone, Handewadi Road",
-      "addressLocality": "Handewadi, Pune",
-      "addressRegion": "Maharashtra",
-      "postalCode": "412308",
-      "addressCountry": "IN"
-    }
-  };
+export function LocalityFooterLinks({
+  className = "",
+  theme = "light",
+  currentSlug,
+}: {
+  className?: string;
+  theme?: "light" | "dark";
+  currentSlug?: string;
+}) {
+  const locations = getPublishedLocations();
+  const isLight = theme === "light";
 
   return (
+    <div className={`mt-14 border-t ${isLight ? "border-sand/10 pt-6" : "border-[#F3EFE7]/15 pt-6"} ${className}`}>
+      <p className={`text-[10px] uppercase tracking-[0.25em] mb-3 font-semibold ${isLight ? "text-sand/50" : "text-[#F3EFE7]/50"}`}>
+        Interior Design Services Across Pune:
+      </p>
+      <div className={`flex flex-wrap items-center gap-x-4 gap-y-2 text-xs ${isLight ? "text-sand/70" : "text-[#F3EFE7]/70"}`}>
+        {locations.map((loc, idx) => {
+          const isCurrent = currentSlug === loc.slug;
+          return (
+            <span key={loc.slug} className="inline-flex items-center gap-4">
+              {isCurrent ? (
+                <span
+                  className={`font-semibold ${isLight ? "text-gold" : "text-white"}`}
+                  aria-current="page"
+                >
+                  {loc.name}
+                </span>
+              ) : (
+                <Link
+                  to="/locations/$slug"
+                  params={{ slug: loc.slug }}
+                  className={`transition-colors ${isLight ? "hover:text-gold" : "hover:text-[#DE1D25]"}`}
+                  aria-label={`Interior Designer in ${loc.name}, Pune`}
+                >
+                  {loc.name}
+                </Link>
+              )}
+              {idx < locations.length - 1 && (
+                <span className={isLight ? "text-sand/30" : "text-[#F3EFE7]/30"} aria-hidden="true">•</span>
+              )}
+            </span>
+          );
+        })}
+      </div>
+    </div>
+  );
+}
+
+export function Contact({ onEnquire }: { onEnquire?: () => void }) {
+  return (
     <section id="contact" className="relative bg-ink pb-12 pt-14 sm:pt-20 scroll-mt-20">
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-      />
       <div className="mx-auto max-w-[1600px] px-6 md:px-12">
         <Reveal>
           <p className="eyebrow">Contact</p>
@@ -1101,14 +1136,15 @@ export function Contact({ onEnquire }: { onEnquire?: () => void }) {
               type="button"
               onClick={onEnquire}
               {...hoverProps()}
-              className="inline-block border border-gold/60 px-8 py-4 text-[10px] uppercase tracking-[0.3em] text-gold transition-colors hover:bg-gold/15 cursor-pointer"
+              className="inline-block w-full sm:w-auto text-center border border-gold/60 px-8 py-4 text-[10px] uppercase tracking-[0.3em] text-gold transition-colors hover:bg-gold/15 cursor-pointer"
             >
               Start a project
             </button>
           </div>
         </Reveal>
-        <div className="mt-20 flex flex-col md:flex-row items-center justify-between gap-6 border-t border-[#171817]/15 pt-8 pb-4 text-[#6E665C]">
-          <div className="flex items-center gap-4">
+        <LocalityFooterLinks theme="light" />
+        <div className="mt-12 flex flex-col md:flex-row items-center justify-between gap-6 border-t border-[#171817]/15 pt-8 pb-4 text-[#6E665C]">
+          <div className="flex flex-col sm:flex-row items-center gap-3 sm:gap-4 text-center sm:text-left">
             <CallistoLogo variant="full-color" height={32} />
             <span className="text-[10px] uppercase tracking-[0.2em] text-[#6E665C]">
               © {new Date().getFullYear()} | Premium Interior Studio

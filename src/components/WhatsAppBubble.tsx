@@ -1,5 +1,4 @@
-import React, { useState } from "react";
-import { MessageCircle, X } from "lucide-react";
+import React from "react";
 
 interface WhatsAppBubbleProps {
   phoneNumber?: string;
@@ -10,8 +9,6 @@ export const WhatsAppBubble: React.FC<WhatsAppBubbleProps> = ({
   phoneNumber = "918766926173",
   message = "Hello Callisto Living! I'm interested in your luxury interior design services.",
 }) => {
-  const [showTooltip, setShowTooltip] = useState(true);
-
   // Clean phone number to remove any +, spaces, or dashes
   const cleanNumber = phoneNumber.replace(/\D/g, "");
   const whatsappUrl = `https://api.whatsapp.com/send?phone=${cleanNumber}&text=${encodeURIComponent(
@@ -20,29 +17,6 @@ export const WhatsAppBubble: React.FC<WhatsAppBubbleProps> = ({
 
   return (
     <div className="fixed bottom-6 right-6 z-[180] flex flex-col items-end gap-2 pointer-events-auto select-none">
-      {/* TOOLTIP BANNER */}
-      {showTooltip && (
-        <div className="relative flex items-center gap-3 rounded-xl border border-white/20 bg-[#171817]/95 px-4 py-2.5 shadow-2xl backdrop-blur-md animate-in fade-in slide-in-from-bottom-3 duration-300 max-w-xs">
-          <div className="flex flex-col">
-            <span className="text-[10px] font-semibold uppercase tracking-wider text-[#25D366]">
-              NEED INTERIOR CONSULTATION?
-            </span>
-            <span className="text-xs text-[#F3EFE7] font-light">
-              Chat live with Callisto Living
-            </span>
-          </div>
-          <button
-            type="button"
-            onClick={() => setShowTooltip(false)}
-            className="text-white/50 hover:text-white transition-colors cursor-pointer p-0.5"
-            aria-label="Close tooltip"
-          >
-            <X size={14} />
-          </button>
-          <div className="absolute -bottom-1.5 right-5 h-3 w-3 rotate-45 border-b border-r border-white/20 bg-[#171817]" />
-        </div>
-      )}
-
       {/* FLOATING WHATSAPP BUTTON */}
       <a
         href={whatsappUrl}

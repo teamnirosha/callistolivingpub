@@ -15,7 +15,6 @@ const CATEGORIES = [
   "Kitchens & Dining",
   "Bespoke Joinery",
   "Interior Details",
-  "Commercial & Ateliers",
 ] as const;
 
 export const GallerySection: React.FC<GallerySectionProps> = ({ onEnquire, isFullPage = false }) => {
@@ -37,9 +36,15 @@ export const GallerySection: React.FC<GallerySectionProps> = ({ onEnquire, isFul
           <span className="text-[10px] font-semibold uppercase tracking-[0.3em] text-[#DE1D25]">
             INTERIOR DESIGN PORTFOLIO
           </span>
-          <h2 className="mt-2 font-display text-4xl sm:text-5xl md:text-6xl font-light text-[#171817] tracking-wider">
-            GALLERY
-          </h2>
+          {isFullPage ? (
+            <h1 className="mt-2 font-display text-4xl sm:text-5xl md:text-6xl font-light text-[#171817] tracking-wider">
+              GALLERY
+            </h1>
+          ) : (
+            <h2 className="mt-2 font-display text-4xl sm:text-5xl md:text-6xl font-light text-[#171817] tracking-wider">
+              GALLERY
+            </h2>
+          )}
           <p className="mt-3 max-w-xl text-xs sm:text-sm text-[#171817]/70 leading-relaxed font-light">
             Curated archive of bespoke luxury residences, spatial interiors, and fine joinery.
           </p>
@@ -78,12 +83,18 @@ export const GallerySection: React.FC<GallerySectionProps> = ({ onEnquire, isFul
                 className="group relative aspect-[4/3] w-full overflow-hidden rounded-xs border border-[#171817]/15 bg-white transition-all duration-500 hover:border-[#DE1D25]/70 hover:shadow-xl cursor-pointer"
               >
                 {/* Equal 4:3 Aspect Image */}
-                <img
-                  src={item.image}
-                  alt="Callisto Living Gallery"
-                  className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.06]"
-                  loading={index < 4 ? "eager" : "lazy"}
-                />
+                <picture className="block h-full w-full">
+                  <source srcSet={item.image.replace(/\.jpeg$/i, ".avif")} type="image/avif" />
+                  <source srcSet={item.image.replace(/\.jpeg$/i, ".webp")} type="image/webp" />
+                  <img
+                    src={item.image}
+                    alt={item.alt}
+                    width={item.width}
+                    height={item.height}
+                    className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.06]"
+                    loading={index < 4 ? "eager" : "lazy"}
+                  />
+                </picture>
 
                 {/* Minimal Clean Hover Overlay — NO TEXT TITLE OVERLAY */}
                 <div className="absolute inset-0 bg-black/30 opacity-0 transition-opacity duration-300 group-hover:opacity-100 flex items-center justify-center">
@@ -104,12 +115,20 @@ export const GallerySection: React.FC<GallerySectionProps> = ({ onEnquire, isFul
                 className="break-inside-avoid mb-6 w-full group relative overflow-hidden rounded-xs border border-[#171817]/15 bg-white transition-all duration-500 hover:border-[#DE1D25]/70 hover:shadow-2xl cursor-pointer"
               >
                 {/* Natural Aspect Image for True Masonry Flow */}
-                <img
-                  src={item.image}
-                  alt="Callisto Living Gallery"
-                  className="w-full h-auto block object-cover transition-transform duration-700 ease-out group-hover:scale-[1.05]"
-                  loading={index < 8 ? "eager" : "lazy"}
-                />
+                <picture className="block w-full">
+                  <source srcSet={item.image.replace(/\.jpeg$/i, ".avif")} type="image/avif" />
+                  <source srcSet={item.image.replace(/\.jpeg$/i, ".webp")} type="image/webp" />
+                  <img
+                    src={item.image}
+                    alt={item.alt}
+                    width={item.width}
+                    height={item.height}
+                    style={{ aspectRatio: `${item.width} / ${item.height}` }}
+                    className="w-full h-auto block object-cover transition-transform duration-700 ease-out group-hover:scale-[1.05]"
+                    loading={index < 8 ? "eager" : "lazy"}
+                    fetchPriority={isFullPage && index === 0 ? "high" : undefined}
+                  />
+                </picture>
 
                 {/* Minimal Clean Hover Overlay — NO TEXT TITLE OVERLAY */}
                 <div className="absolute inset-0 bg-black/30 opacity-0 transition-opacity duration-300 group-hover:opacity-100 flex items-center justify-center">

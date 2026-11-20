@@ -1,11 +1,14 @@
 export interface GalleryItem {
   id: string;
   title: string;
-  category: "Living Rooms" | "Primary Suites" | "Kitchens & Dining" | "Bespoke Joinery" | "Interior Details" | "Commercial & Ateliers";
+  category: "Living Rooms" | "Primary Suites" | "Kitchens & Dining" | "Bespoke Joinery" | "Interior Details";
   image: string;
   location: string;
   year: string;
   description: string;
+  width: number;
+  height: number;
+  alt: string;
 }
 
 export const GALLERY_ITEMS: GalleryItem[] = [
@@ -16,7 +19,10 @@ export const GALLERY_ITEMS: GalleryItem[] = [
     image: "/Gallary/interior_design_001.jpeg",
     location: "Pune",
     year: "2025",
-    description: "Handcrafted wooden prayer shrine with frosted devotional glass panels and artisan bell motifs."
+    description: "Handcrafted wooden prayer shrine with frosted devotional glass panels and artisan bell motifs.",
+    width: 770,
+    height: 1024,
+    alt: "Bespoke Mandir Prayer Shrine — Handcrafted wooden prayer shrine with frosted devotional glass panels and artisan bell motifs."
   },
   {
     id: "gallery-002",
@@ -25,7 +31,10 @@ export const GALLERY_ITEMS: GalleryItem[] = [
     image: "/Gallary/interior_design_002.jpeg",
     location: "Mumbai",
     year: "2025",
-    description: "Contemporary multi-panel sliding wardrobe with contrasting deep teal and matte white finish."
+    description: "Contemporary multi-panel sliding wardrobe with contrasting deep teal and matte white finish.",
+    width: 1080,
+    height: 1112,
+    alt: "Geometric Teal & White Master Wardrobe — Contemporary multi-panel sliding wardrobe with contrasting deep teal and matte white finish."
   },
   {
     id: "gallery-003",
@@ -34,7 +43,10 @@ export const GALLERY_ITEMS: GalleryItem[] = [
     image: "/Gallary/interior_design_003.jpeg",
     location: "Bangalore",
     year: "2025",
-    description: "Integrated wooden headboard, floating bed base, and fluted vertical wooden room divider."
+    description: "Integrated wooden headboard, floating bed base, and fluted vertical wooden room divider.",
+    width: 1280,
+    height: 589,
+    alt: "Minimalist Master Suite Platform Bed — Integrated wooden headboard, floating bed base, and fluted vertical wooden room divider."
   },
   {
     id: "gallery-004",
@@ -43,7 +55,10 @@ export const GALLERY_ITEMS: GalleryItem[] = [
     image: "/Gallary/interior_design_004.jpeg",
     location: "Hyderabad",
     year: "2025",
-    description: "Floor-to-ceiling storage suite with high-gloss acrylic and warm walnut wood grain finishes."
+    description: "Floor-to-ceiling storage suite with high-gloss acrylic and warm walnut wood grain finishes.",
+    width: 1280,
+    height: 874,
+    alt: "Two-Tone Walnut & Gloss Tall Wardrobe — Floor-to-ceiling storage suite with high-gloss acrylic and warm walnut wood grain finishes."
   },
   {
     id: "gallery-005",
@@ -52,7 +67,10 @@ export const GALLERY_ITEMS: GalleryItem[] = [
     image: "/Gallary/interior_design_005.jpeg",
     location: "Mumbai",
     year: "2025",
-    description: "Custom laser-cut CNC floral trellis partition cabinet with integrated prayer altar."
+    description: "Custom laser-cut CNC floral trellis partition cabinet with integrated prayer altar.",
+    width: 963,
+    height: 1280,
+    alt: "Artisan Jali Screen Partition Mandir — Custom laser-cut CNC floral trellis partition cabinet with integrated prayer altar."
   },
   {
     id: "gallery-006",
@@ -61,7 +79,10 @@ export const GALLERY_ITEMS: GalleryItem[] = [
     image: "/Gallary/interior_design_006.jpeg",
     location: "Pune",
     year: "2025",
-    description: "Two-tone modular kitchen featuring olive green lower cabinets, glossy cream overheads, and mosaic backsplash."
+    description: "Two-tone modular kitchen featuring olive green lower cabinets, glossy cream overheads, and mosaic backsplash.",
+    width: 1080,
+    height: 1247,
+    alt: "Contemporary Olive & Ivory Modular Kitchen — Two-tone modular kitchen featuring olive green lower cabinets, glossy cream overheads, and mosaic backsplash."
   },
   {
     id: "gallery-007",
@@ -70,7 +91,10 @@ export const GALLERY_ITEMS: GalleryItem[] = [
     image: "/Gallary/interior_design_007.jpeg",
     location: "Delhi NCR",
     year: "2025",
-    description: "Playful geometric chevron styling in ochre and marine teal with seamless white upper storage."
+    description: "Playful geometric chevron styling in ochre and marine teal with seamless white upper storage.",
+    width: 1280,
+    height: 589,
+    alt: "Chevron Inlay Children's Bedroom Wardrobe — Playful geometric chevron styling in ochre and marine teal with seamless white upper storage."
   },
   {
     id: "gallery-008",
@@ -79,7 +103,10 @@ export const GALLERY_ITEMS: GalleryItem[] = [
     image: "/Gallary/interior_design_008.jpeg",
     location: "Mumbai",
     year: "2025",
-    description: "Modern gloss cobalt blue base cabinetry with white overhead storage and black polished granite countertop."
+    description: "Modern gloss cobalt blue base cabinetry with white overhead storage and black polished granite countertop.",
+    width: 1280,
+    height: 720,
+    alt: "Cobalt Blue & Quartz L-Shaped Kitchen — Modern gloss cobalt blue base cabinetry with white overhead storage and black polished granite countertop."
   },
   {
     id: "gallery-009",
@@ -88,7 +115,10 @@ export const GALLERY_ITEMS: GalleryItem[] = [
     image: "/Gallary/interior_design_009.jpeg",
     location: "Goa",
     year: "2025",
-    description: "Architectural monolithic wardrobe with slim vertical hardware and integrated crown header."
+    description: "Architectural monolithic wardrobe with slim vertical hardware and integrated crown header.",
+    width: 596,
+    height: 1280,
+    alt: "Floor-to-Ceiling Matte White Storage Suite — Architectural monolithic wardrobe with slim vertical hardware and integrated crown header."
   },
   {
     id: "gallery-010",
@@ -97,7 +127,10 @@ export const GALLERY_ITEMS: GalleryItem[] = [
     image: "/Gallary/interior_design_010.jpeg",
     location: "Pune",
     year: "2025",
-    description: "Custom pull-out wicker baskets, quartz prep counters, and gloss lacquered modular cabinetry."
+    description: "Custom pull-out wicker baskets, quartz prep counters, and gloss lacquered modular cabinetry.",
+    width: 651,
+    height: 1156,
+    alt: "Modular Kitchen Corner Pantry Unit — Custom pull-out wicker baskets, quartz prep counters, and gloss lacquered modular cabinetry."
   },
   {
     id: "gallery-011",
@@ -106,7 +139,10 @@ export const GALLERY_ITEMS: GalleryItem[] = [
     image: "/Gallary/interior_design_011.jpeg",
     location: "Bangalore",
     year: "2025",
-    description: "Built-in bedroom storage with turquoise and sunshine yellow banding, mirror, and integrated lighting."
+    description: "Built-in bedroom storage with turquoise and sunshine yellow banding, mirror, and integrated lighting.",
+    width: 960,
+    height: 1280,
+    alt: "Primary Suite Vanity & Accent Wardrobe — Built-in bedroom storage with turquoise and sunshine yellow banding, mirror, and integrated lighting."
   },
   {
     id: "gallery-012",
@@ -115,7 +151,10 @@ export const GALLERY_ITEMS: GalleryItem[] = [
     image: "/Gallary/interior_design_012.jpeg",
     location: "Mumbai",
     year: "2025",
-    description: "Luxury dressing suite featuring backlit fluted vanity mirror, bronze glass wardrobe, and accessory shelves."
+    description: "Luxury dressing suite featuring backlit fluted vanity mirror, bronze glass wardrobe, and accessory shelves.",
+    width: 735,
+    height: 985,
+    alt: "Illuminated Oval Vanity & Glass Wardrobe — Luxury dressing suite featuring backlit fluted vanity mirror, bronze glass wardrobe, and accessory shelves."
   },
   {
     id: "gallery-013",
@@ -124,7 +163,10 @@ export const GALLERY_ITEMS: GalleryItem[] = [
     image: "/Gallary/interior_design_013.jpeg",
     location: "Alibaug",
     year: "2025",
-    description: "Custom fluted wood acoustic slats, backlit circular mirror, and illuminated glass display closet."
+    description: "Custom fluted wood acoustic slats, backlit circular mirror, and illuminated glass display closet.",
+    width: 735,
+    height: 959,
+    alt: "Sage Green Joinery with Half-Moon Mirror — Custom fluted wood acoustic slats, backlit circular mirror, and illuminated glass display closet."
   },
   {
     id: "gallery-014",
@@ -133,7 +175,10 @@ export const GALLERY_ITEMS: GalleryItem[] = [
     image: "/Gallary/interior_design_014.jpeg",
     location: "Mumbai",
     year: "2025",
-    description: "Marble-topped center island with velvet barstools, glass mullion cabinets, and brushed silver pendants."
+    description: "Marble-topped center island with velvet barstools, glass mullion cabinets, and brushed silver pendants.",
+    width: 736,
+    height: 1104,
+    alt: "Classic Luxury Island Kitchen — Marble-topped center island with velvet barstools, glass mullion cabinets, and brushed silver pendants."
   },
   {
     id: "gallery-015",
@@ -142,7 +187,10 @@ export const GALLERY_ITEMS: GalleryItem[] = [
     image: "/Gallary/interior_design_015.jpeg",
     location: "Delhi NCR",
     year: "2025",
-    description: "Expansive contemporary kitchen with seamless under-cabinet LED channel lighting and polished marble flooring."
+    description: "Expansive contemporary kitchen with seamless under-cabinet LED channel lighting and polished marble flooring.",
+    width: 1200,
+    height: 1600,
+    alt: "Spacious Beige Marble U-Shaped Kitchen — Expansive contemporary kitchen with seamless under-cabinet LED channel lighting and polished marble flooring."
   },
   {
     id: "gallery-016",
@@ -151,7 +199,10 @@ export const GALLERY_ITEMS: GalleryItem[] = [
     image: "/Gallary/interior_design_016.jpeg",
     location: "Bangalore",
     year: "2025",
-    description: "Sleek reflective gloss white and graphite cabinetry with integrated built-in appliances and picture window."
+    description: "Sleek reflective gloss white and graphite cabinetry with integrated built-in appliances and picture window.",
+    width: 1086,
+    height: 1448,
+    alt: "High-Gloss Monochrome Modular Kitchen — Sleek reflective gloss white and graphite cabinetry with integrated built-in appliances and picture window."
   },
   {
     id: "gallery-017",
@@ -160,7 +211,10 @@ export const GALLERY_ITEMS: GalleryItem[] = [
     image: "/Gallary/interior_design_017.jpeg",
     location: "Mumbai",
     year: "2025",
-    description: "Warm amber ambient lighting, central crystal chandelier, and travertine marble floor tiling."
+    description: "Warm amber ambient lighting, central crystal chandelier, and travertine marble floor tiling.",
+    width: 736,
+    height: 783,
+    alt: "Grand Chandelier Luxury Kitchen — Warm amber ambient lighting, central crystal chandelier, and travertine marble floor tiling."
   },
   {
     id: "gallery-018",
@@ -169,7 +223,10 @@ export const GALLERY_ITEMS: GalleryItem[] = [
     image: "/Gallary/interior_design_018.jpeg",
     location: "Hyderabad",
     year: "2025",
-    description: "Wide-perspective view of illuminated glass cabinets, quartz countertops, and built-in refrigerator column."
+    description: "Wide-perspective view of illuminated glass cabinets, quartz countertops, and built-in refrigerator column.",
+    width: 1200,
+    height: 1600,
+    alt: "Contemporary Champagne Kitchen Suite — Wide-perspective view of illuminated glass cabinets, quartz countertops, and built-in refrigerator column."
   },
   {
     id: "gallery-019",
@@ -178,7 +235,10 @@ export const GALLERY_ITEMS: GalleryItem[] = [
     image: "/Gallary/interior_design_019.jpeg",
     location: "Goa",
     year: "2025",
-    description: "Daylight-filled kitchen overlooking landscaped garden, with recessed strip lighting and seamless drawers."
+    description: "Daylight-filled kitchen overlooking landscaped garden, with recessed strip lighting and seamless drawers.",
+    width: 736,
+    height: 981,
+    alt: "Sunlit Travertine U-Shaped Kitchen — Daylight-filled kitchen overlooking landscaped garden, with recessed strip lighting and seamless drawers."
   },
   {
     id: "gallery-020",
@@ -187,7 +247,10 @@ export const GALLERY_ITEMS: GalleryItem[] = [
     image: "/Gallary/interior_design_020.jpeg",
     location: "Pune",
     year: "2025",
-    description: "Natural fluted oak upper cabinets, matte cream base units, and undermount perimeter ambient lighting."
+    description: "Natural fluted oak upper cabinets, matte cream base units, and undermount perimeter ambient lighting.",
+    width: 735,
+    height: 919,
+    alt: "Warm Oak & Cream Contemporary Kitchen — Natural fluted oak upper cabinets, matte cream base units, and undermount perimeter ambient lighting."
   },
   {
     id: "gallery-021",
@@ -196,7 +259,10 @@ export const GALLERY_ITEMS: GalleryItem[] = [
     image: "/Gallary/interior_design_021.jpeg",
     location: "Mumbai",
     year: "2025",
-    description: "Fluted island breakfast counter, matte black conical pendant lamps, and integrated glass display units."
+    description: "Fluted island breakfast counter, matte black conical pendant lamps, and integrated glass display units.",
+    width: 675,
+    height: 1200,
+    alt: "Sage Green Island Kitchen with Pendant Trio — Fluted island breakfast counter, matte black conical pendant lamps, and integrated glass display units."
   },
   {
     id: "gallery-022",
@@ -205,7 +271,10 @@ export const GALLERY_ITEMS: GalleryItem[] = [
     image: "/Gallary/interior_design_022.jpeg",
     location: "Bangalore",
     year: "2025",
-    description: "Warm slatted wood island with velvet upholstered stools, amber glass overheads, and gold pendants."
+    description: "Warm slatted wood island with velvet upholstered stools, amber glass overheads, and gold pendants.",
+    width: 736,
+    height: 883,
+    alt: "Luxury Fluted Breakfast Bar & Lounge — Warm slatted wood island with velvet upholstered stools, amber glass overheads, and gold pendants."
   },
   {
     id: "gallery-023",
@@ -214,7 +283,10 @@ export const GALLERY_ITEMS: GalleryItem[] = [
     image: "/Gallary/interior_design_023.jpeg",
     location: "Alibaug",
     year: "2025",
-    description: "Artisan cabinetry with antique brass hardware, marble veined backsplash, and gold gooseneck faucet."
+    description: "Artisan cabinetry with antique brass hardware, marble veined backsplash, and gold gooseneck faucet.",
+    width: 736,
+    height: 1104,
+    alt: "Classic Sage Green Shaker Kitchen — Artisan cabinetry with antique brass hardware, marble veined backsplash, and gold gooseneck faucet."
   },
   {
     id: "gallery-024",
@@ -223,7 +295,10 @@ export const GALLERY_ITEMS: GalleryItem[] = [
     image: "/Gallary/interior_design_024.jpeg",
     location: "Mumbai",
     year: "2025",
-    description: "Sculptural curved timber island, globe glass pendant lights, and ambient display tower."
+    description: "Sculptural curved timber island, globe glass pendant lights, and ambient display tower.",
+    width: 735,
+    height: 672,
+    alt: "Curved Fluted Island & Warm Wood Kitchen — Sculptural curved timber island, globe glass pendant lights, and ambient display tower."
   },
   {
     id: "gallery-025",
@@ -232,7 +307,10 @@ export const GALLERY_ITEMS: GalleryItem[] = [
     image: "/Gallary/interior_design_025.jpeg",
     location: "Delhi NCR",
     year: "2025",
-    description: "Grand kitchen design with rounded island display, curved bar seating, and brass glass-front cabinets."
+    description: "Grand kitchen design with rounded island display, curved bar seating, and brass glass-front cabinets.",
+    width: 1122,
+    height: 1402,
+    alt: "Mint Green & Gold Luxury Kitchen Residence — Grand kitchen design with rounded island display, curved bar seating, and brass glass-front cabinets."
   },
   {
     id: "gallery-026",
@@ -241,7 +319,10 @@ export const GALLERY_ITEMS: GalleryItem[] = [
     image: "/Gallary/interior_design_026.jpeg",
     location: "Pune",
     year: "2025",
-    description: "Fluted accent panelling, built-in double ovens, open display shelving, and polished marble flooring."
+    description: "Fluted accent panelling, built-in double ovens, open display shelving, and polished marble flooring.",
+    width: 736,
+    height: 1307,
+    alt: "Minimalist Cream & Appliance Column Kitchen — Fluted accent panelling, built-in double ovens, open display shelving, and polished marble flooring."
   },
   {
     id: "gallery-027",
@@ -250,7 +331,10 @@ export const GALLERY_ITEMS: GalleryItem[] = [
     image: "/Gallary/interior_design_027.jpeg",
     location: "Goa",
     year: "2025",
-    description: "Custom teak framing with linen-textured panel inserts and circular handcrafted door pulls."
+    description: "Custom teak framing with linen-textured panel inserts and circular handcrafted door pulls.",
+    width: 666,
+    height: 999,
+    alt: "Natural Timber & Linen Wardrobe Suite — Custom teak framing with linen-textured panel inserts and circular handcrafted door pulls."
   },
   {
     id: "gallery-028",
@@ -259,7 +343,10 @@ export const GALLERY_ITEMS: GalleryItem[] = [
     image: "/Gallary/interior_design_028.jpeg",
     location: "Pune",
     year: "2025",
-    description: "Rich woodcraft with woven heritage textile inlays and integrated bedside platform."
+    description: "Rich woodcraft with woven heritage textile inlays and integrated bedside platform.",
+    width: 797,
+    height: 1200,
+    alt: "Heritage Carved Wood Bedroom Wardrobe — Rich woodcraft with woven heritage textile inlays and integrated bedside platform."
   },
   {
     id: "gallery-029",
@@ -268,7 +355,10 @@ export const GALLERY_ITEMS: GalleryItem[] = [
     image: "/Gallary/interior_design_029.jpeg",
     location: "Mumbai",
     year: "2025",
-    description: "Fluted wall cladding with backlit crescent mirror, accessory vitrine, and bouclé vanity stool."
+    description: "Fluted wall cladding with backlit crescent mirror, accessory vitrine, and bouclé vanity stool.",
+    width: 735,
+    height: 959,
+    alt: "Contemporary Olive Dressing & Wardrobe Suite — Fluted wall cladding with backlit crescent mirror, accessory vitrine, and bouclé vanity stool."
   },
   {
     id: "gallery-030",
@@ -277,7 +367,10 @@ export const GALLERY_ITEMS: GalleryItem[] = [
     image: "/Gallary/interior_design_030.jpeg",
     location: "Bangalore",
     year: "2025",
-    description: "Soft rose and cream arched wardrobe with central vertical display shelving."
+    description: "Soft rose and cream arched wardrobe with central vertical display shelving.",
+    width: 736,
+    height: 981,
+    alt: "Arched Fluted Wardrobe with Open Shelves — Soft rose and cream arched wardrobe with central vertical display shelving."
   },
   {
     id: "gallery-031",
@@ -286,7 +379,10 @@ export const GALLERY_ITEMS: GalleryItem[] = [
     image: "/Gallary/interior_design_031.jpeg",
     location: "Delhi NCR",
     year: "2025",
-    description: "Scandi-modern bedroom joinery featuring built-in work desk with recessed LED desk lighting."
+    description: "Scandi-modern bedroom joinery featuring built-in work desk with recessed LED desk lighting.",
+    width: 735,
+    height: 956,
+    alt: "Integrated Study & Curved Wardrobe Unit — Scandi-modern bedroom joinery featuring built-in work desk with recessed LED desk lighting."
   },
   {
     id: "gallery-032",
@@ -295,7 +391,10 @@ export const GALLERY_ITEMS: GalleryItem[] = [
     image: "/Gallary/interior_design_032.jpeg",
     location: "Mumbai",
     year: "2025",
-    description: "Architectural wardrobe with integrated rounded shelving niches and semicircular door handles."
+    description: "Architectural wardrobe with integrated rounded shelving niches and semicircular door handles.",
+    width: 736,
+    height: 736,
+    alt: "Minimalist Wardrobe with Oval Display Niches — Architectural wardrobe with integrated rounded shelving niches and semicircular door handles."
   },
   {
     id: "gallery-033",
@@ -304,7 +403,10 @@ export const GALLERY_ITEMS: GalleryItem[] = [
     image: "/Gallary/interior_design_033.jpeg",
     location: "Alibaug",
     year: "2025",
-    description: "Atmospheric luxury wardrobe with vertical lighting channels, leather vanity bench, and bronze aluminum frames."
+    description: "Atmospheric luxury wardrobe with vertical lighting channels, leather vanity bench, and bronze aluminum frames.",
+    width: 960,
+    height: 1200,
+    alt: "Bronze Tinted Glass Walk-In Closet — Atmospheric luxury wardrobe with vertical lighting channels, leather vanity bench, and bronze aluminum frames."
   },
   {
     id: "gallery-034",
@@ -313,7 +415,10 @@ export const GALLERY_ITEMS: GalleryItem[] = [
     image: "/Gallary/interior_design_034.jpeg",
     location: "Pune",
     year: "2025",
-    description: "Arched paneling with playful bunny hardware, illuminated display alcoves, and integrated drawers."
+    description: "Arched paneling with playful bunny hardware, illuminated display alcoves, and integrated drawers.",
+    width: 736,
+    height: 736,
+    alt: "Pastel Blue Arched Children's Wardrobe — Arched paneling with playful bunny hardware, illuminated display alcoves, and integrated drawers."
   },
   {
     id: "gallery-035",
@@ -322,7 +427,10 @@ export const GALLERY_ITEMS: GalleryItem[] = [
     image: "/Gallary/interior_design_035.jpeg",
     location: "Bangalore",
     year: "2025",
-    description: "Custom children's room with character wardrobe, illuminated study alcove, and fluted paneling."
+    description: "Custom children's room with character wardrobe, illuminated study alcove, and fluted paneling.",
+    width: 736,
+    height: 1307,
+    alt: "Whimsical Bear Study & Bedroom Joinery — Custom children's room with character wardrobe, illuminated study alcove, and fluted paneling."
   },
   {
     id: "gallery-036",
@@ -331,7 +439,10 @@ export const GALLERY_ITEMS: GalleryItem[] = [
     image: "/Gallary/interior_design_036.jpeg",
     location: "Mumbai",
     year: "2025",
-    description: "Rich woodgrain textures contrasted with curved cream panels and warm illuminated display cubbies."
+    description: "Rich woodgrain textures contrasted with curved cream panels and warm illuminated display cubbies.",
+    width: 1200,
+    height: 1600,
+    alt: "Walnut & Cream Wardrobe with Display Tower — Rich woodgrain textures contrasted with curved cream panels and warm illuminated display cubbies."
   },
   {
     id: "gallery-037",
@@ -340,7 +451,10 @@ export const GALLERY_ITEMS: GalleryItem[] = [
     image: "/Gallary/interior_design_037.jpeg",
     location: "Hyderabad",
     year: "2025",
-    description: "Clean white cabinetry with organic curved solid wood cutout handle detailing."
+    description: "Clean white cabinetry with organic curved solid wood cutout handle detailing.",
+    width: 736,
+    height: 736,
+    alt: "Minimalist Sculptural Cutout Wardrobe — Clean white cabinetry with organic curved solid wood cutout handle detailing."
   },
   {
     id: "gallery-038",
@@ -349,7 +463,10 @@ export const GALLERY_ITEMS: GalleryItem[] = [
     image: "/Gallary/interior_design_038.jpeg",
     location: "Delhi NCR",
     year: "2025",
-    description: "Bespoke bedroom joinery with vertical U-routing, brass handle plates, and mirrored dressing wall."
+    description: "Bespoke bedroom joinery with vertical U-routing, brass handle plates, and mirrored dressing wall.",
+    width: 1179,
+    height: 1397,
+    alt: "Master Bedroom U-Grooved Headboard Wardrobe — Bespoke bedroom joinery with vertical U-routing, brass handle plates, and mirrored dressing wall."
   },
   {
     id: "gallery-039",
@@ -358,7 +475,10 @@ export const GALLERY_ITEMS: GalleryItem[] = [
     image: "/Gallary/interior_design_039.jpeg",
     location: "Goa",
     year: "2025",
-    description: "Integrated bedroom storage, backlit warm oak shelves, and dedicated vanity workspace."
+    description: "Integrated bedroom storage, backlit warm oak shelves, and dedicated vanity workspace.",
+    width: 735,
+    height: 973,
+    alt: "Arched Suite with Built-In Desk & Open Vitrine — Integrated bedroom storage, backlit warm oak shelves, and dedicated vanity workspace."
   },
   {
     id: "gallery-040",
@@ -367,7 +487,10 @@ export const GALLERY_ITEMS: GalleryItem[] = [
     image: "/Gallary/interior_design_040.jpeg",
     location: "Pune",
     year: "2025",
-    description: "Soft tone-on-tone arched door profile with fluted lower drawers and natural wooden pulls."
+    description: "Soft tone-on-tone arched door profile with fluted lower drawers and natural wooden pulls.",
+    width: 968,
+    height: 1200,
+    alt: "Pastel Grey Arched Wardrobe with Slatted Base — Soft tone-on-tone arched door profile with fluted lower drawers and natural wooden pulls."
   },
   {
     id: "gallery-041",
@@ -376,7 +499,10 @@ export const GALLERY_ITEMS: GalleryItem[] = [
     image: "/Gallary/interior_design_041.jpeg",
     location: "Mumbai",
     year: "2025",
-    description: "High-sheen reflective wardrobe with rounded outer lighting trim and brushed brass hardware."
+    description: "High-sheen reflective wardrobe with rounded outer lighting trim and brushed brass hardware.",
+    width: 1200,
+    height: 1189,
+    alt: "Curved Profile High-Gloss Wardrobe Suite — High-sheen reflective wardrobe with rounded outer lighting trim and brushed brass hardware."
   },
   {
     id: "gallery-042",
@@ -385,7 +511,10 @@ export const GALLERY_ITEMS: GalleryItem[] = [
     image: "/Gallary/interior_design_042.jpeg",
     location: "Bangalore",
     year: "2025",
-    description: "Tall vertical fluting accented with metallic champagne gold inlays and extended pull handles."
+    description: "Tall vertical fluting accented with metallic champagne gold inlays and extended pull handles.",
+    width: 736,
+    height: 736,
+    alt: "Fluted Gold Inlay Master Bedroom Wardrobe — Tall vertical fluting accented with metallic champagne gold inlays and extended pull handles."
   },
   {
     id: "gallery-043",
@@ -394,7 +523,10 @@ export const GALLERY_ITEMS: GalleryItem[] = [
     image: "/Gallary/interior_design_043.jpeg",
     location: "Mumbai",
     year: "2025",
-    description: "Refined architectural boiserie moldings with soft matte grey finish and solid brass pulls."
+    description: "Refined architectural boiserie moldings with soft matte grey finish and solid brass pulls.",
+    width: 736,
+    height: 1104,
+    alt: "Neo-Classical Moulded Panel Wardrobe — Refined architectural boiserie moldings with soft matte grey finish and solid brass pulls."
   },
   {
     id: "gallery-044",
@@ -403,7 +535,10 @@ export const GALLERY_ITEMS: GalleryItem[] = [
     image: "/Gallary/interior_design_044.jpeg",
     location: "Alibaug",
     year: "2025",
-    description: "Curved illuminated fluted panel, glowing oval mirror, dressing vanity, and glass-front closet."
+    description: "Curved illuminated fluted panel, glowing oval mirror, dressing vanity, and glass-front closet.",
+    width: 735,
+    height: 571,
+    alt: "Luxury Master Suite Wardrobe & Vanity — Curved illuminated fluted panel, glowing oval mirror, dressing vanity, and glass-front closet."
   },
   {
     id: "gallery-045",
@@ -412,7 +547,10 @@ export const GALLERY_ITEMS: GalleryItem[] = [
     image: "/Gallary/interior_design_045.jpeg",
     location: "Delhi NCR",
     year: "2025",
-    description: "Custom children's bedroom suite with dynamic graphic motifs, low bench storage, and open hanging bay."
+    description: "Custom children's bedroom suite with dynamic graphic motifs, low bench storage, and open hanging bay.",
+    width: 736,
+    height: 967,
+    alt: "Sport Bedroom Wardrobe & Open Hanger Bay — Custom children's bedroom suite with dynamic graphic motifs, low bench storage, and open hanging bay."
   },
   {
     id: "gallery-046",
@@ -421,7 +559,10 @@ export const GALLERY_ITEMS: GalleryItem[] = [
     image: "/Gallary/interior_design_046.jpeg",
     location: "Mumbai",
     year: "2025",
-    description: "Warm backlighting, vanity drawers with gold pulls, fluted wood accents, and matching dressing stool."
+    description: "Warm backlighting, vanity drawers with gold pulls, fluted wood accents, and matching dressing stool.",
+    width: 736,
+    height: 887,
+    alt: "Gloss & Slatted Wood Dressing Room Suite — Warm backlighting, vanity drawers with gold pulls, fluted wood accents, and matching dressing stool."
   },
   {
     id: "gallery-047",
@@ -430,7 +571,10 @@ export const GALLERY_ITEMS: GalleryItem[] = [
     image: "/Gallary/interior_design_047.jpeg",
     location: "Bangalore",
     year: "2025",
-    description: "Arched dual wardrobes with center dressing alcove, fluted green paneling, and oval vanity mirror."
+    description: "Arched dual wardrobes with center dressing alcove, fluted green paneling, and oval vanity mirror.",
+    width: 736,
+    height: 1104,
+    alt: "Emerald & Cream Arched Vanity Dressing Room — Arched dual wardrobes with center dressing alcove, fluted green paneling, and oval vanity mirror."
   },
   {
     id: "gallery-048",
@@ -439,7 +583,10 @@ export const GALLERY_ITEMS: GalleryItem[] = [
     image: "/Gallary/interior_design_048.jpeg",
     location: "Pune",
     year: "2025",
-    description: "High-gloss grey doors with vertical fluted lighting strips, mirror cabinet, and low drawers."
+    description: "High-gloss grey doors with vertical fluted lighting strips, mirror cabinet, and low drawers.",
+    width: 736,
+    height: 736,
+    alt: "Slate Grey Contemporary Wardrobe with Vanity — High-gloss grey doors with vertical fluted lighting strips, mirror cabinet, and low drawers."
   },
   {
     id: "gallery-049",
@@ -448,7 +595,10 @@ export const GALLERY_ITEMS: GalleryItem[] = [
     image: "/Gallary/interior_design_049.jpeg",
     location: "Mumbai",
     year: "2025",
-    description: "Integrated dressing table with illuminated mirror, bronze glass wardrobe, and soft ambient glow."
+    description: "Integrated dressing table with illuminated mirror, bronze glass wardrobe, and soft ambient glow.",
+    width: 735,
+    height: 985,
+    alt: "Champagne Wardrobe with Glass Vitrine & Mirror — Integrated dressing table with illuminated mirror, bronze glass wardrobe, and soft ambient glow."
   },
   {
     id: "gallery-050",
@@ -457,7 +607,10 @@ export const GALLERY_ITEMS: GalleryItem[] = [
     image: "/Gallary/interior_design_050.jpeg",
     location: "Delhi NCR",
     year: "2025",
-    description: "Dramatic dark fluting with rose gold handles, illuminated circular dressing mirror, and open display."
+    description: "Dramatic dark fluting with rose gold handles, illuminated circular dressing mirror, and open display.",
+    width: 736,
+    height: 1103,
+    alt: "Charcoal Fluted Wardrobe with Rose Gold Trim — Dramatic dark fluting with rose gold handles, illuminated circular dressing mirror, and open display."
   },
   {
     id: "gallery-051",
@@ -466,7 +619,10 @@ export const GALLERY_ITEMS: GalleryItem[] = [
     image: "/Gallary/interior_design_051.jpeg",
     location: "Goa",
     year: "2025",
-    description: "Grey traditional mullioned glass doors with cross-pattern woodwork and integrated soft lighting."
+    description: "Grey traditional mullioned glass doors with cross-pattern woodwork and integrated soft lighting.",
+    width: 736,
+    height: 736,
+    alt: "Classical Mullion Glass Armoire Unit — Grey traditional mullioned glass doors with cross-pattern woodwork and integrated soft lighting."
   },
   {
     id: "gallery-052",
@@ -475,7 +631,10 @@ export const GALLERY_ITEMS: GalleryItem[] = [
     image: "/Gallary/interior_design_052.jpeg",
     location: "Alibaug",
     year: "2025",
-    description: "Handwoven natural rattan panel doors paired with rich walnut frame and arched display shelving."
+    description: "Handwoven natural rattan panel doors paired with rich walnut frame and arched display shelving.",
+    width: 736,
+    height: 1104,
+    alt: "Cane Weave & Walnut Wood Wardrobe Suite — Handwoven natural rattan panel doors paired with rich walnut frame and arched display shelving."
   },
   {
     id: "gallery-053",
@@ -484,7 +643,10 @@ export const GALLERY_ITEMS: GalleryItem[] = [
     image: "/Gallary/interior_design_053.jpeg",
     location: "Mumbai",
     year: "2025",
-    description: "Entry hall joinery featuring arched coat rack niche, marble bench, and classic taupe cabinetry."
+    description: "Entry hall joinery featuring arched coat rack niche, marble bench, and classic taupe cabinetry.",
+    width: 948,
+    height: 1280,
+    alt: "Bespoke Foyer Entryway Niche & Wardrobe — Entry hall joinery featuring arched coat rack niche, marble bench, and classic taupe cabinetry."
   },
   {
     id: "gallery-054",
@@ -493,7 +655,10 @@ export const GALLERY_ITEMS: GalleryItem[] = [
     image: "/Gallary/interior_design_054.jpeg",
     location: "Bangalore",
     year: "2025",
-    description: "Cream lacquer central doors flanked by vertical warm-lit fluted glass display cabinets."
+    description: "Cream lacquer central doors flanked by vertical warm-lit fluted glass display cabinets.",
+    width: 674,
+    height: 674,
+    alt: "Illuminated Glass Vitrine Flanked Wardrobe — Cream lacquer central doors flanked by vertical warm-lit fluted glass display cabinets."
   },
   {
     id: "gallery-055",
@@ -502,7 +667,10 @@ export const GALLERY_ITEMS: GalleryItem[] = [
     image: "/Gallary/interior_design_055.jpeg",
     location: "Mumbai",
     year: "2025",
-    description: "All-white dressing suite with glass display wardrobes, marble jewelry island, and herringbone oak floors."
+    description: "All-white dressing suite with glass display wardrobes, marble jewelry island, and herringbone oak floors.",
+    width: 736,
+    height: 1104,
+    alt: "Grand Master Walk-In Dressing Room — All-white dressing suite with glass display wardrobes, marble jewelry island, and herringbone oak floors."
   },
   {
     id: "gallery-056",
@@ -511,7 +679,10 @@ export const GALLERY_ITEMS: GalleryItem[] = [
     image: "/Gallary/interior_design_056.jpeg",
     location: "Pune",
     year: "2025",
-    description: "Curved arched panels with warm amber illuminated book niches and fluted skirting."
+    description: "Curved arched panels with warm amber illuminated book niches and fluted skirting.",
+    width: 1200,
+    height: 1500,
+    alt: "Arched Beige Storage Wall with Ambient Niches — Curved arched panels with warm amber illuminated book niches and fluted skirting."
   },
   {
     id: "gallery-057",
@@ -520,7 +691,10 @@ export const GALLERY_ITEMS: GalleryItem[] = [
     image: "/Gallary/interior_design_057.jpeg",
     location: "Delhi NCR",
     year: "2025",
-    description: "Integrated dressing table, backlit curved wall accent, and dark aluminum frame glass closet."
+    description: "Integrated dressing table, backlit curved wall accent, and dark aluminum frame glass closet.",
+    width: 735,
+    height: 919,
+    alt: "Bespoke Bedroom Suite with Glass Closet — Integrated dressing table, backlit curved wall accent, and dark aluminum frame glass closet."
   },
   {
     id: "gallery-058",
@@ -529,7 +703,10 @@ export const GALLERY_ITEMS: GalleryItem[] = [
     image: "/Gallary/interior_design_058.jpeg",
     location: "Mumbai",
     year: "2025",
-    description: "Curved top arch profile with smoked glass doors and warm vertical perimeter strip illumination."
+    description: "Curved top arch profile with smoked glass doors and warm vertical perimeter strip illumination.",
+    width: 960,
+    height: 1200,
+    alt: "Dark Bronze Arch Glass Walk-In Wardrobe — Curved top arch profile with smoked glass doors and warm vertical perimeter strip illumination."
   },
   {
     id: "gallery-059",
@@ -538,7 +715,10 @@ export const GALLERY_ITEMS: GalleryItem[] = [
     image: "/Gallary/interior_design_059.jpeg",
     location: "Hyderabad",
     year: "2025",
-    description: "Wrap-around glass closet system with concealed ceiling tracks and warm floating shelf lights."
+    description: "Wrap-around glass closet system with concealed ceiling tracks and warm floating shelf lights.",
+    width: 1200,
+    height: 1200,
+    alt: "Corner Glass Walk-In Closet with Amber Glow — Wrap-around glass closet system with concealed ceiling tracks and warm floating shelf lights."
   },
   {
     id: "gallery-060",
@@ -547,7 +727,10 @@ export const GALLERY_ITEMS: GalleryItem[] = [
     image: "/Gallary/interior_design_060.jpeg",
     location: "Bangalore",
     year: "2025",
-    description: "Floor-to-ceiling glass doors with lighted garment racks, folded cloth cubbies, and lower shoe display."
+    description: "Floor-to-ceiling glass doors with lighted garment racks, folded cloth cubbies, and lower shoe display.",
+    width: 736,
+    height: 1072,
+    alt: "Illuminated Glass Display Wardrobe Suite — Floor-to-ceiling glass doors with lighted garment racks, folded cloth cubbies, and lower shoe display."
   },
   {
     id: "gallery-061",
@@ -556,7 +739,10 @@ export const GALLERY_ITEMS: GalleryItem[] = [
     image: "/Gallary/interior_design_061.jpeg",
     location: "Mumbai",
     year: "2025",
-    description: "Bespoke gold frame vitrines with illuminated handbag display shelves and lower chest of drawers."
+    description: "Bespoke gold frame vitrines with illuminated handbag display shelves and lower chest of drawers.",
+    width: 1080,
+    height: 1080,
+    alt: "Champagne Gold Walk-In Dressing Gallery — Bespoke gold frame vitrines with illuminated handbag display shelves and lower chest of drawers."
   },
   {
     id: "gallery-062",
@@ -565,7 +751,10 @@ export const GALLERY_ITEMS: GalleryItem[] = [
     image: "/Gallary/interior_design_062.jpeg",
     location: "Mumbai",
     year: "2025",
-    description: "Handcrafted velvet-lined watch compartments, sunglass dividers, and gold drawer hardware."
+    description: "Handcrafted velvet-lined watch compartments, sunglass dividers, and gold drawer hardware.",
+    width: 736,
+    height: 1155,
+    alt: "Artisan Watch & Fine Jewelry Drawer Organizer — Handcrafted velvet-lined watch compartments, sunglass dividers, and gold drawer hardware."
   },
   {
     id: "gallery-063",
@@ -574,7 +763,10 @@ export const GALLERY_ITEMS: GalleryItem[] = [
     image: "/Gallary/interior_design_063.jpeg",
     location: "Goa",
     year: "2025",
-    description: "Seamless glass front wardrobe with warm integrated shelf glow and full-length vanity mirror panel."
+    description: "Seamless glass front wardrobe with warm integrated shelf glow and full-length vanity mirror panel.",
+    width: 1200,
+    height: 1200,
+    alt: "Bronze Anodized Multi-Bay Glass Closet — Seamless glass front wardrobe with warm integrated shelf glow and full-length vanity mirror panel."
   },
   {
     id: "gallery-064",
@@ -583,7 +775,10 @@ export const GALLERY_ITEMS: GalleryItem[] = [
     image: "/Gallary/interior_design_064.jpeg",
     location: "Alibaug",
     year: "2025",
-    description: "Panoramic view of walk-in wardrobe with glass front cabinets, illuminated shelving, and marble vanity island."
+    description: "Panoramic view of walk-in wardrobe with glass front cabinets, illuminated shelving, and marble vanity island.",
+    width: 736,
+    height: 1104,
+    alt: "Luxury Dressing Suite with Marble Accessory Island — Panoramic view of walk-in wardrobe with glass front cabinets, illuminated shelving, and marble vanity island."
   },
   {
     id: "gallery-065",
@@ -592,7 +787,10 @@ export const GALLERY_ITEMS: GalleryItem[] = [
     image: "/Gallary/interior_design_065.jpeg",
     location: "Pune",
     year: "2025",
-    description: "Custom fluted baseboard, vertical brass hardware, and warm LED illuminated display recesses."
+    description: "Custom fluted baseboard, vertical brass hardware, and warm LED illuminated display recesses.",
+    width: 1200,
+    height: 1500,
+    alt: "Warm Beige Arched Wardrobe Installation — Custom fluted baseboard, vertical brass hardware, and warm LED illuminated display recesses."
   },
   {
     id: "gallery-066",
@@ -601,7 +799,10 @@ export const GALLERY_ITEMS: GalleryItem[] = [
     image: "/Gallary/interior_design_066.jpeg",
     location: "Delhi NCR",
     year: "2025",
-    description: "Modern bedroom integration featuring dark glass doors, interior wardrobe lighting, and bedside table."
+    description: "Modern bedroom integration featuring dark glass doors, interior wardrobe lighting, and bedside table.",
+    width: 736,
+    height: 1104,
+    alt: "Minimalist Black Frame Master Glass Closet — Modern bedroom integration featuring dark glass doors, interior wardrobe lighting, and bedside table."
   },
   {
     id: "gallery-067",
@@ -610,7 +811,10 @@ export const GALLERY_ITEMS: GalleryItem[] = [
     image: "/Gallary/interior_design_067.jpeg",
     location: "Bangalore",
     year: "2025",
-    description: "Warm lit glass display cabinets framing smooth cream wardrobe doors with vertical brass handles."
+    description: "Warm lit glass display cabinets framing smooth cream wardrobe doors with vertical brass handles.",
+    width: 674,
+    height: 674,
+    alt: "Contemporary Cream Wardrobe with Glass Pillars — Warm lit glass display cabinets framing smooth cream wardrobe doors with vertical brass handles."
   }
 ];
 

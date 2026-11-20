@@ -7,7 +7,7 @@ const LINKS = [
   { id: "about", label: "ABOUT", to: "/", hash: "about" },
   { id: "services", label: "SERVICES", to: "/", hash: "services" },
   { id: "projects", label: "PROJECTS", to: "/", hash: "projects" },
-  { id: "gallery", label: "GALLERY", to: "/", hash: "gallery" },
+  { id: "gallery", label: "GALLERY", to: "/gallery", hash: "" },
   { id: "contact", label: "CONTACT", to: "/", hash: "contact" },
 ];
 
@@ -155,6 +155,7 @@ export function Navbar({ onEnquire }: NavbarProps) {
           to="/"
           onClick={(e) => handleNavClick(e, "/", undefined, "home")}
           className="group flex items-center transition-opacity hover:opacity-90 cursor-pointer"
+          aria-label="Callisto Living - Return to Homepage"
         >
           <CallistoLogo
             variant="dark"

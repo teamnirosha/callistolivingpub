@@ -129,7 +129,8 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onEnquire }) => {
               )}
               <img
                 src={opt.image}
-                alt={opt.name}
+                alt={opt.subtitle || opt.name}
+                fetchPriority={idx === 0 ? "high" : undefined}
                 className="h-full w-full object-cover object-center transition-opacity duration-1000 ease-out"
               />
             </picture>
