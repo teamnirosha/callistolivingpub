@@ -1,4 +1,5 @@
 import React from "react";
+import { trackWhatsAppClick } from "@/lib/analytics";
 
 interface WhatsAppBubbleProps {
   phoneNumber?: string;
@@ -22,6 +23,7 @@ export const WhatsAppBubble: React.FC<WhatsAppBubbleProps> = ({
         href={whatsappUrl}
         target="_blank"
         rel="noopener noreferrer"
+        onClick={() => trackWhatsAppClick("floating_bubble")}
         className="group relative flex h-14 w-14 items-center justify-center rounded-full bg-[#25D366] text-white shadow-[0_10px_30px_rgba(37,211,102,0.4)] transition-all duration-300 hover:scale-1.1 hover:shadow-[0_15px_35px_rgba(37,211,102,0.6)] cursor-pointer"
         aria-label="Contact Callisto Living on WhatsApp"
       >

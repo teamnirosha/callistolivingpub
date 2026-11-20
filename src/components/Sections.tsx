@@ -12,6 +12,7 @@ import { getPublishedLocations } from "@/lib/locations";
 import { setState } from "@/lib/store";
 import { MaterialExplorer } from "./SceneControls";
 import { CallistoLogo } from "./CallistoLogo";
+import { trackWhatsAppClick } from "@/lib/analytics";
 
 if (typeof window !== "undefined") gsap.registerPlugin(ScrollTrigger);
 
@@ -1120,6 +1121,7 @@ export function Contact({ onEnquire }: { onEnquire?: () => void }) {
                 href="https://api.whatsapp.com/send?phone=918766926173&text=Hello%20Callisto%20Living!%20I%20would%20like%20to%20inquire%20about%20interior%20design%20services."
                 target="_blank"
                 rel="noopener noreferrer"
+                onClick={() => trackWhatsAppClick("contact_section")}
                 className="inline-flex items-center gap-1.5 text-[#25D366] hover:text-white transition-colors"
               >
                 <span>Chat on WhatsApp</span>

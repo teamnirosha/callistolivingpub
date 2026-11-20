@@ -6,6 +6,7 @@ import { Navbar } from "@/components/Navbar";
 import { EnquiryPopup } from "@/components/EnquiryPopup";
 import { LocalityFooterLinks } from "@/components/Sections";
 import { getLocation } from "@/lib/locations";
+import { trackWhatsAppClick } from "@/lib/analytics";
 
 export const Route = createFileRoute("/locations/$slug")({
   loader: ({ params }) => {
@@ -540,6 +541,7 @@ function LocationPage() {
                   href={`https://api.whatsapp.com/send?phone=918766926173&text=Hello%20Callisto%20Living!%20I'm%20interested%20in%20interior%20design%20services%20for%20my%20home%20in%20${encodeURIComponent(location.name)}.`}
                   target="_blank"
                   rel="noopener noreferrer"
+                  onClick={() => trackWhatsAppClick(`location_${location.slug}`)}
                   className="w-full border border-[#25D366]/40 bg-[#25D366]/10 px-8 py-4 text-xs font-semibold uppercase tracking-[0.2em] text-[#25D366] transition-all duration-300 hover:bg-[#25D366] hover:text-white cursor-pointer text-center"
                 >
                   CHAT ON WHATSAPP

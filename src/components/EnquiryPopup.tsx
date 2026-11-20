@@ -1,6 +1,7 @@
 import React, { FormEvent, useEffect, useId, useState } from "react";
 import { CheckCircle2, Upload, X } from "lucide-react";
 import { CallistoLogo } from "./CallistoLogo";
+import { trackLead } from "@/lib/analytics";
 
 type EnquiryPopupProps = {
   open: boolean;
@@ -293,10 +294,22 @@ export const EnquiryPopup: React.FC<EnquiryPopupProps> = ({ open, onClose, defau
       if (response.ok || response.status === 200 || response.status === 201) {
         setIsSubmitting(false);
         setIsSubmitted(true);
+        trackLead({
+          property_type: formData.propertyType,
+          budget: formData.budget,
+          bhk: formData.bhk,
+          location: formData.location,
+        });
       } else {
         console.warn("n8n Webhook response status:", response.status);
         setIsSubmitting(false);
         setIsSubmitted(true);
+        trackLead({
+          property_type: formData.propertyType,
+          budget: formData.budget,
+          bhk: formData.bhk,
+          location: formData.location,
+        });
       }
     } catch (error) {
       console.error("Failed to submit lead data to n8n webhook:", error);
