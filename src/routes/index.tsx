@@ -79,6 +79,11 @@ function Home() {
         "@id": "https://www.callistoliving.in/#website",
         "url": "https://www.callistoliving.in/",
         "name": "Callisto Living",
+        "alternateName": [
+          "Callisto Living Pune",
+          "Callisto Living Luxury Interiors",
+          "Callisto Living Studio"
+        ],
         "publisher": {
           "@id": "https://www.callistoliving.in/#studio",
         },
@@ -87,10 +92,12 @@ function Home() {
         "@type": "InteriorDesignStudio",
         "@id": "https://www.callistoliving.in/#studio",
         "name": "Callisto Living",
+        "alternateName": "Callisto Living Luxury Interior Design Studio",
         "url": "https://www.callistoliving.in/",
+        "logo": "https://www.callistoliving.in/logo.png",
+        "image": "https://www.callistoliving.in/logo-square.png",
         "telephone": "+91 87669 26173",
         "email": "info@callistoliving.in",
-        "image": "https://www.callistoliving.in/Gallary/interior_design_001.jpeg",
         "address": {
           "@type": "PostalAddress",
           "streetAddress": "FG 1002, Silver Stone, Handewadi Road",

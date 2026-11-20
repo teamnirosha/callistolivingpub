@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "vite dev",
     "images:modern": "node scripts/generate-modern-images.mjs",
-    "build": "node scripts/generate-modern-images.mjs && node scripts/generate-sitemap.mjs && vite build",
+    "favicons": "node scripts/generate-favicons.mjs",
+    "build": "node scripts/generate-favicons.mjs && node scripts/generate-modern-images.mjs && node scripts/generate-sitemap.mjs && vite build",
     "build:dev": "vite build --mode development",
     "preview": "vite preview",
     "lint": "eslint .",
