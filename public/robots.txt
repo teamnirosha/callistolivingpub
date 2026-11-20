@@ -1,4 +1,11 @@
 User-agent: *
 Allow: /
 
+# OpenAI & ChatGPT Search Crawler Directives
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
 Sitemap: https://www.callistoliving.in/sitemap.xml
